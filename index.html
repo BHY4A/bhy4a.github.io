@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ru" data-app="hub">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Расчётные утилиты · КНИТУ</title>
+<meta name="description" content="Веб-утилиты для лабораторных и курсовых работ по вариантам: расчёт, отчёты Word, файлы для MATLAB, Simulink и КОМПАС-3D.">
+<script src="js/suite.js?v=202610080100"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jura:wght@500;600;700&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a222b'/%3E%3Crect x='6' y='6' width='9' height='9' rx='2' fill='%235fa8ef'/%3E%3Crect x='17' y='6' width='9' height='9' rx='2' fill='%23ad97f0'/%3E%3Crect x='6' y='17' width='9' height='9' rx='2' fill='%234fc3ae'/%3E%3Crect x='17' y='17' width='9' height='9' rx='2' fill='none' stroke='%23ffffff' stroke-width='1.6' stroke-dasharray='2.4 2'/%3E%3C/svg%3E">
+<style>
+/* Хаб утилит. Та же система, что в утилитах (шапка, лист, штамп, шрифты), но нейтральная графитовая палитра:
+   цвет здесь несут только карточки — каждая в цвете своей утилиты. */
+:root {
+  --bg: #eceef1; --sheet: #fbfcfd; --sheet-2: #f2f4f6; --fg: #1a222b; --muted: #5a6776;
+  --line: #cfd5dc; --line-strong: #a9b2bd;
+  --accent: #1a222b; --accent-ink: #ffffff; --accent-soft: #e3e7ec;
+  --shadow: 0 1px 2px rgba(20, 35, 55, .06), 0 6px 24px rgba(20, 35, 55, .06);
+  --f-disp: "Jura", "Bahnschrift", "DIN Alternate", "Arial Narrow", sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", "Cascadia Mono", Consolas, "Courier New", monospace;
+  --r: 6px;
+  --sapr: #0a5aa8; --sapr-soft: #dce9f7;
+  --krrs: #5a3ea8; --krrs-soft: #e7e1f6;
+  --op: #0b6e62; --op-soft: #d8eeea;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1216; --sheet: #161a20; --sheet-2: #1b2027; --fg: #e1e8ef; --muted: #93a2b2; --line: #28303a; --line-strong: #3c4652;
+    --accent: #e1e8ef; --accent-ink: #11161c; --accent-soft: #232a33;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 6px 24px rgba(0, 0, 0, .25);
+    --sapr: #5fa8ef; --sapr-soft: #15283b; --krrs: #ad97f0; --krrs-soft: #262040; --op: #4fc3ae; --op-soft: #11302b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1216; --sheet: #161a20; --sheet-2: #1b2027; --fg: #e1e8ef; --muted: #93a2b2; --line: #28303a; --line-strong: #3c4652;
+  --accent: #e1e8ef; --accent-ink: #11161c; --accent-soft: #232a33;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 6px 24px rgba(0, 0, 0, .25);
+  --sapr: #5fa8ef; --sapr-soft: #15283b; --krrs: #ad97f0; --krrs-soft: #262040; --op: #4fc3ae; --op-soft: #11302b;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--f-body); -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+a { color: inherit; }
+
+/* шапка — как в утилитах */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--sheet) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.top-in { max-width: 1120px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 14px; }
+.brand { display: flex; align-items: center; gap: 10px; min-width: 0; margin-right: auto; }
+.brand svg { flex: none; }
+.brand b { font: 700 18px/1.1 var(--f-disp); letter-spacing: .02em; }
+.brand small { display: block; color: var(--muted); font-size: 12px; letter-spacing: .02em; }
+.icon-btn { flex: none; width: 36px; height: 36px; display: inline-grid; place-items: center; border: 1px solid var(--line-strong); border-radius: var(--r); background: var(--sheet); color: var(--fg); cursor: pointer; }
+.icon-btn:hover { border-color: var(--fg); }
+
+.wrap { max-width: 1120px; margin: 0 auto; padding: 26px 16px 60px; }
+.eyebrow { font: 600 11.5px/1.2 var(--f-body); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+h1 { font: 700 30px/1.15 var(--f-disp); letter-spacing: .01em; margin: 6px 0 8px; }
+.lead { margin: 0; color: var(--muted); max-width: 70ch; }
+.intro { margin-bottom: 26px; }
+
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 28px; }
+@media (max-width: 980px) { .cards { grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); } }
+.card-e { padding: 14px 18px 0; font: 600 10.5px/1.2 var(--f-body); text-transform: uppercase; letter-spacing: .08em; color: var(--c); }
+
+/* карточка утилиты: цвет — из переменной своей утилиты */
+.card { --c: var(--fg); --cs: var(--sheet-2); position: relative; display: flex; flex-direction: column; background: var(--sheet); border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: 8px; box-shadow: var(--shadow); color: var(--fg); text-decoration: none; transition: border-color .15s, transform .15s; }
+.card.sapr { --c: var(--sapr); --cs: var(--sapr-soft); }
+.card.krrs { --c: var(--krrs); --cs: var(--krrs-soft); }
+.card.op { --c: var(--op); --cs: var(--op-soft); }
+.card:hover { border-color: var(--c); transform: translateY(-1px); }
+.card:focus-visible { outline: 2px solid var(--c); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .card, .card:hover { transition: none; transform: none; } }
+.card-h { display: flex; gap: 12px; align-items: center; padding: 8px 18px 10px; }
+.tile { flex: none; display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 9px; background: var(--c); color: var(--accent-ink); }
+:root:not([data-theme="dark"]) .tile { color: #fff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tile { color: #0b0f14; } }
+.card-h b { display: block; font: 700 18px/1.2 var(--f-disp); letter-spacing: .01em; }
+.card-h small { display: block; font-size: 12.5px; color: var(--muted); }
+.card p { margin: 0 18px 12px; font-size: 14px; }
+/* штамп — как угловой штамп листа в утилитах */
+.stamp { margin: 0 18px 12px; border-collapse: collapse; font: 12px/1.3 var(--f-mono); width: calc(100% - 36px); }
+.stamp td { border: 1px solid var(--fg); padding: 4px 7px; vertical-align: top; }
+.stamp td.k { width: 34%; color: var(--muted); font-family: var(--f-body); font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 18px 14px; padding: 0; list-style: none; }
+.chips li { font-size: 12px; padding: 2px 8px; border-radius: 20px; background: var(--cs); color: var(--fg); border: 1px solid color-mix(in srgb, var(--c) 30%, transparent); }
+.card-f { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 18px; border-top: 1px dashed var(--line-strong); }
+.last { font-size: 12.5px; color: var(--muted); min-width: 0; }
+.last b { color: var(--fg); font-weight: 600; }
+.go { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: var(--r); background: var(--c); color: var(--accent-ink); font-size: 14px; font-weight: 600; white-space: nowrap; }
+:root:not([data-theme="dark"]) .go { color: #fff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .go { color: #0b0f14; } }
+
+/* «Везде одинаково» */
+.same { margin-top: 10px; background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); padding: 20px 22px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 22px; align-items: center; }
+.same h2 { font: 700 20px/1.25 var(--f-disp); margin: 4px 0 6px; }
+.same > div > p { margin: 0 0 12px; color: var(--muted); font-size: 14px; }
+.same ol { margin: 0; padding: 0; list-style: none; counter-reset: n; display: grid; gap: 8px; font-size: 14px; }
+.same li { counter-increment: n; display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start; }
+.same li::before { content: counter(n); display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--fg); color: var(--sheet); font: 700 11px/1 var(--f-body); margin-top: 1px; }
+.same li b { font-weight: 600; }
+.wf { width: 100%; height: auto; display: block; }
+.wf .fr { fill: var(--sheet-2); stroke: var(--line-strong); }
+.wf .pp { fill: var(--sheet); stroke: var(--line-strong); }
+.wf .ln { fill: var(--line); }
+.wf .ln2 { fill: var(--line-strong); }
+.wf .ac { fill: var(--muted); }
+.wf .tx { font: 600 10px var(--f-body); fill: var(--muted); }
+.wf .mk circle { fill: var(--fg); }
+.wf .mk text { font: 700 10px var(--f-body); fill: var(--sheet); text-anchor: middle; dominant-baseline: central; }
+.foot { max-width: 1120px; margin: 0 auto; padding: 0 16px 30px; font-size: 12.5px; color: var(--muted); }
+
+@media (max-width: 760px) {
+  .same { grid-template-columns: minmax(0, 1fr); padding: 16px; }
+}
+@media (max-width: 640px) {
+  body { font-size: 14.5px; }
+  .top-in { padding: 8px 12px; gap: 10px; }
+  .brand small { display: none; }
+  .brand b { font-size: 16px; }
+  .wrap { padding-top: 18px; }
+  h1 { font-size: 25px; }
+  .card-e { padding: 12px 14px 0; }
+  .card-h { padding: 8px 14px 8px; }
+  .card p, .chips { margin-inline: 14px; }
+  .stamp { margin-inline: 14px; width: calc(100% - 28px); }
+  .card-f { padding: 10px 14px; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="brand">
+      <svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="var(--fg)"/><rect x="6" y="6" width="9" height="9" rx="2" fill="#5fa8ef"/><rect x="17" y="6" width="9" height="9" rx="2" fill="#ad97f0"/><rect x="6" y="17" width="9" height="9" rx="2" fill="#4fc3ae"/><rect x="17" y="17" width="9" height="9" rx="2" fill="none" stroke="var(--sheet)" stroke-width="1.6" stroke-dasharray="2.4 2"/></svg>
+      <div><b>Расчётные утилиты · КНИТУ</b><small>Лабораторные и курсовые по вариантам: расчёт, отчёты Word, файлы для MATLAB и КОМПАС-3D</small></div>
+    </div>
+    <button class="icon-btn" id="theme" aria-label="Переключить тему"><svg width="17" height="17" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13z" fill="currentColor"/><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    <div class="eyebrow">Выберите утилиту</div>
+    <h1>Расчёт по вашему варианту</h1>
+    <p class="lead">Выбираете номер варианта — утилита сразу пересчитывает всю работу по методичке, показывает каждую формулу с подстановкой и собирает отчёт Word и файлы для MATLAB или КОМПАС-3D. Всё считается в браузере, ничего не отправляется на сервер.</p>
+  </div>
+
+  <section aria-label="Утилиты">
+    <div class="cards">
+      <a class="card sapr" href="sapr-labs/" data-app="sapr-labs">
+        <div class="card-e">САПР · системы автоматизированного проектирования</div>
+        <div class="card-h"><span class="tile"><svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22c4 0 4-12 8-12s4 8 7 8 3-4 7-4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span>
+          <div><b>Электропривод · ЛР 1–6</b><small>Расчёт и моделирование ЭП с регуляторами</small></div></div>
+        <p>Выбор двигателя, ТП и датчиков, оптимизация контура скорости, цифровые регуляторы скорости и положения.</p>
+        <table class="stamp"><tr><td class="k">Варианты</td><td>1–222, табл. П.8</td></tr><tr><td class="k">Разделы</td><td>Данные + ЛР № 1–6</td></tr></table>
+        <ul class="chips"><li>Отчёты Word</li><li>Скрипты MATLAB</li><li>Simulink</li><li>CoDeSys</li><li>PNG и CSV</li></ul>
+        <div class="card-f"><span class="last" data-last>Ещё не открывали</span><span class="go">Открыть →</span></div>
+      </a>
+      <a class="card krrs" href="krrs-robot/" data-app="krrs-robot">
+        <div class="card-e">Конструирование роботов и РТС</div>
+        <div class="card-h"><span class="tile"><svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect x="11" y="5" width="10" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2.2" transform="rotate(8 16 20)"/><circle cx="10" cy="23" r="3.6" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="22" cy="23" r="3.6" fill="none" stroke="currentColor" stroke-width="2.2"/></svg></span>
+          <div><b>Робот-балансир · LQR</b><small>Модель, пространство состояний, LQR</small></div></div>
+        <p>Уравнения Лагранжа, матрицы A–D, системная модель с ШИМ и датчиками, LQR-регулятор и ответы на контрольные вопросы.</p>
+        <table class="stamp"><tr><td class="k">Варианты</td><td>1–28 + пример методички</td></tr><tr><td class="k">Разделы</td><td>Данные + этапы 1–4, вопросы</td></tr></table>
+        <ul class="chips"><li>Отчёт Word</li><li>Скрипты MATLAB</li><li>Модели Simulink</li><li>PNG и CSV</li></ul>
+        <div class="card-f"><span class="last" data-last>Ещё не открывали</span><span class="go">Открыть →</span></div>
+      </a>
+      <a class="card op" href="op-coursework/" data-app="op-coursework">
+        <div class="card-e">Основы проектирования</div>
+        <div class="card-h"><span class="tile"><svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><circle cx="12" cy="17" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="23" cy="11" r="4" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 10.5v-2M12 25.5v-2M5.5 17h-2M20.5 17h-2" stroke="currentColor" stroke-width="2"/></svg></span>
+          <div><b>Основы проектирования · КП</b><small>Расчёт привода и файлы для КОМПАС-3D</small></div></div>
+        <p>Курсовой проект: двигатель, передачи, валы, подшипники, шпонки, муфта; чертежи и пояснительная записка.</p>
+        <table class="stamp"><tr><td class="k">Варианты</td><td>№ 1–26 по списку (задания 1, 3, 6)</td></tr><tr><td class="k">Разделы</td><td>Данные + разделы 1–6, КОМПАС</td></tr></table>
+        <ul class="chips"><li>Записка Word</li><li>Макросы КОМПАС-3D</li><li>Чертежи</li><li>DXF</li></ul>
+        <div class="card-f"><span class="last" data-last>Ещё не открывали</span><span class="go">Открыть →</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="same" aria-labelledby="same-h">
+    <div>
+      <div class="eyebrow">Во всех утилитах</div>
+      <h2 id="same-h">Одинаковое устройство</h2>
+      <p>Освоили одну — в остальных всё на тех же местах. Утилиты различаются только цветом.</p>
+      <ol>
+        <li><span><b>Вариант</b> — вверху справа: стрелки ‹ › или список; всё пересчитывается сразу.</span></li>
+        <li><span><b>Кнопки шапки</b> — ссылка на этот расчёт, светлая/тёмная тема, переход в другую утилиту.</span></li>
+        <li><span><b>Этапы работы</b> — колонка слева; под открытым этапом — его разделы. На телефоне — строка вкладок и кнопка «Разделы».</span></li>
+        <li><span><b>Лист со штампом</b> — расчёт с формулами; любую формулу можно скопировать в Word.</span></li>
+        <li><span><b>Исходные данные</b> — всегда первая вкладка: параметры → методика → отчёт и файлы → сохранения.</span></li>
+      </ol>
+    </div>
+    <svg class="wf" viewBox="0 0 360 230" role="img" aria-label="Схема интерфейса утилиты с пронумерованными зонами">
+      <rect class="fr" x="1" y="1" width="358" height="228" rx="8"/>
+      <rect class="pp" x="1" y="1" width="358" height="30" rx="8"/><rect class="ln" x="1" y="30" width="358" height="1"/>
+      <rect class="ac" x="10" y="8" width="15" height="15" rx="3"/><rect class="ln2" x="31" y="10" width="70" height="5" rx="2"/><rect class="ln" x="31" y="18" width="104" height="4" rx="2"/>
+      <rect class="pp" x="192" y="8" width="62" height="15" rx="3"/><text class="tx" x="223" y="19" text-anchor="middle">‹ 12 ›</text>
+      <rect class="pp" x="262" y="8" width="15" height="15" rx="3"/><rect class="pp" x="282" y="8" width="15" height="15" rx="3"/><rect class="pp" x="302" y="8" width="15" height="15" rx="3"/>
+      <rect class="pp" x="10" y="42" width="78" height="22" rx="4"/><rect class="ac" x="15" y="49" width="7" height="8" rx="1"/><rect class="ln2" x="27" y="49" width="52" height="4" rx="2"/><rect class="ln" x="27" y="56" width="40" height="3" rx="1.5"/>
+      <rect class="ln" x="22" y="70" width="56" height="3" rx="1.5"/><rect class="ln" x="22" y="77" width="48" height="3" rx="1.5"/><rect class="ln" x="22" y="84" width="52" height="3" rx="1.5"/>
+      <rect class="ln2" x="15" y="98" width="7" height="8" rx="1"/><rect class="ln2" x="27" y="98" width="50" height="4" rx="2"/><rect class="ln" x="27" y="105" width="38" height="3" rx="1.5"/>
+      <rect class="ln2" x="15" y="120" width="7" height="8" rx="1"/><rect class="ln2" x="27" y="120" width="46" height="4" rx="2"/><rect class="ln" x="27" y="127" width="40" height="3" rx="1.5"/>
+      <rect class="ln2" x="15" y="142" width="7" height="8" rx="1"/><rect class="ln2" x="27" y="142" width="52" height="4" rx="2"/><rect class="ln" x="27" y="149" width="34" height="3" rx="1.5"/>
+      <rect class="pp" x="98" y="42" width="252" height="178" rx="5"/>
+      <rect class="ln2" x="108" y="54" width="70" height="4" rx="2"/><rect class="ln2" x="108" y="63" width="96" height="9" rx="2"/>
+      <g fill="none" stroke="var(--fg)" stroke-width=".8"><rect x="258" y="52" width="82" height="30"/><path d="M258 62h82M258 72h82M284 52v30M308 52v30"/></g>
+      <rect class="ln" x="98" y="92" width="252" height="1"/>
+      <rect class="ln2" x="108" y="102" width="110" height="5" rx="2"/>
+      <rect x="108" y="114" width="232" height="30" rx="4" fill="none" stroke="var(--line-strong)" stroke-dasharray="4 3"/><rect class="ln2" x="118" y="125" width="120" height="7" rx="2"/>
+      <rect class="ln" x="108" y="154" width="220" height="4" rx="2"/><rect class="ln" x="108" y="162" width="200" height="4" rx="2"/>
+      <rect x="108" y="174" width="232" height="36" rx="4" fill="none" stroke="var(--line-strong)" stroke-dasharray="4 3"/><rect class="ln2" x="118" y="187" width="90" height="7" rx="2"/>
+      <g class="mk"><circle cx="223" cy="38" r="7"/><text x="223" y="38">1</text></g>
+      <g class="mk"><circle cx="290" cy="38" r="7"/><text x="290" y="38">2</text></g>
+      <g class="mk"><circle cx="88" cy="110" r="7"/><text x="88" y="110">3</text></g>
+      <g class="mk"><circle cx="340" cy="129" r="7"/><text x="340" y="129">4</text></g>
+      <g class="mk"><circle cx="88" cy="52" r="7"/><text x="88" y="52">5</text></g>
+    </svg>
+  </section>
+</main>
+<footer class="foot">Сохранения и настройки хранятся только в этом браузере. Тема (светлая/тёмная) общая для всех утилит.</footer>
+
+<script>
+(function () {
+  'use strict';
+  /* последний расчёт в каждой утилите — из её автосохранения (все утилиты на одном домене) */
+  var READ = {
+    'sapr-labs': function (a) { return a.P && a.P.variant ? 'вариант ' + a.P.variant : ''; },
+    'krrs-robot': function (a) { return a.P ? (a.P.variant ? 'вариант ' + a.P.variant : 'пример методички') : ''; },
+    'op-coursework': function (a) { return a.P && a.P.listNo ? '№ ' + a.P.listNo + ' (зад. ' + a.P.task + ', вар. ' + a.P.v + ')' : ''; }
+  };
+  var KEY = { 'sapr-labs': 'ep-autosave', 'krrs-robot': 'rb-autosave', 'op-coursework': 'op-autosave' };
+  function when(t) {
+    var d = new Date(t), now = new Date(), p = function (x) { return String(x).padStart(2, '0'); };
+    var hm = p(d.getHours()) + ':' + p(d.getMinutes());
+    var day = new Date(now.getFullYear(), now.getMonth(), now.getDate()) - new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    if (day === 0) return 'сегодня, ' + hm;
+    if (day === 864e5) return 'вчера, ' + hm;
+    return p(d.getDate()) + '.' + p(d.getMonth() + 1) + '.' + d.getFullYear();
+  }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  Array.prototype.forEach.call(document.querySelectorAll('.card[data-app]'), function (c) {
+    var id = c.getAttribute('data-app'), a = null;
+    try { a = JSON.parse(localStorage.getItem(KEY[id]) || 'null'); } catch (e) { a = null; }
+    if (!a || !a.at) return;
+    var what = READ[id](a); if (!what) return;
+    var el = c.querySelector('[data-last]');
+    el.innerHTML = 'Продолжить: <b>' + esc(what) + '</b> · ' + when(a.at);
+    c.querySelector('.go').textContent = 'Продолжить →';
+  });
+  /* тема — общий ключ с утилитами */
+  document.getElementById('theme').onclick = function () {
+    var r = document.documentElement;
+    var cur = r.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    r.setAttribute('data-theme', nx);
+    try { localStorage.setItem((window.SUITE && SUITE.KEY) || 'suite-theme', nx); } catch (e) { /* ignore */ }
+  };
+})();
+</script>
+</body>
+</html>
