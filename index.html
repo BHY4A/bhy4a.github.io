@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Расчётные утилиты · КНИТУ</title>
-<meta name="description" content="Веб-утилиты для лабораторных и курсовых работ по вариантам: расчёт, отчёты Word, файлы для MATLAB, Simulink и КОМПАС-3D.">
-<script src="js/suite.js?v=202610080100"></script>
+<meta name="description" content="Веб-утилиты для лабораторных и курсовых работ по вариантам: расчёт, отчёты Word, файлы для MATLAB, Simulink и КОМПАС-3D, расчёт ПДВ.">
+<script src="js/suite.js?v=202610091500"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jura:wght@500;600;700&display=swap">
@@ -25,6 +25,7 @@
   --sapr: #0a5aa8; --sapr-soft: #dce9f7;
   --krrs: #5a3ea8; --krrs-soft: #e7e1f6;
   --op: #0b6e62; --op-soft: #d8eeea;
+  --eco: #557313; --eco-soft: #e6eed3;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -32,7 +33,7 @@
     --bg: #0f1216; --sheet: #161a20; --sheet-2: #1b2027; --fg: #e1e8ef; --muted: #93a2b2; --line: #28303a; --line-strong: #3c4652;
     --accent: #e1e8ef; --accent-ink: #11161c; --accent-soft: #232a33;
     --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 6px 24px rgba(0, 0, 0, .25);
-    --sapr: #5fa8ef; --sapr-soft: #15283b; --krrs: #ad97f0; --krrs-soft: #262040; --op: #4fc3ae; --op-soft: #11302b;
+    --sapr: #5fa8ef; --sapr-soft: #15283b; --krrs: #ad97f0; --krrs-soft: #262040; --op: #4fc3ae; --op-soft: #11302b; --eco: #a8cd5c; --eco-soft: #212b13;
     color-scheme: dark;
   }
 }
@@ -40,7 +41,7 @@
   --bg: #0f1216; --sheet: #161a20; --sheet-2: #1b2027; --fg: #e1e8ef; --muted: #93a2b2; --line: #28303a; --line-strong: #3c4652;
   --accent: #e1e8ef; --accent-ink: #11161c; --accent-soft: #232a33;
   --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 6px 24px rgba(0, 0, 0, .25);
-  --sapr: #5fa8ef; --sapr-soft: #15283b; --krrs: #ad97f0; --krrs-soft: #262040; --op: #4fc3ae; --op-soft: #11302b;
+  --sapr: #5fa8ef; --sapr-soft: #15283b; --krrs: #ad97f0; --krrs-soft: #262040; --op: #4fc3ae; --op-soft: #11302b; --eco: #a8cd5c; --eco-soft: #212b13;
   color-scheme: dark;
 }
 
@@ -67,7 +68,7 @@ h1 { font: 700 30px/1.15 var(--f-disp); letter-spacing: .01em; margin: 6px 0 8px
 .lead { margin: 0; color: var(--muted); max-width: 70ch; }
 .intro { margin-bottom: 26px; }
 
-.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 28px; }
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 28px; }
 @media (max-width: 980px) { .cards { grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); } }
 .card-e { padding: 14px 18px 0; font: 600 10.5px/1.2 var(--f-body); text-transform: uppercase; letter-spacing: .08em; color: var(--c); }
 
@@ -76,6 +77,7 @@ h1 { font: 700 30px/1.15 var(--f-disp); letter-spacing: .01em; margin: 6px 0 8px
 .card.sapr { --c: var(--sapr); --cs: var(--sapr-soft); }
 .card.krrs { --c: var(--krrs); --cs: var(--krrs-soft); }
 .card.op { --c: var(--op); --cs: var(--op-soft); }
+.card.eco { --c: var(--eco); --cs: var(--eco-soft); }
 .card:hover { border-color: var(--c); transform: translateY(-1px); }
 .card:focus-visible { outline: 2px solid var(--c); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .card, .card:hover { transition: none; transform: none; } }
@@ -183,6 +185,15 @@ h1 { font: 700 30px/1.15 var(--f-disp); letter-spacing: .01em; margin: 6px 0 8px
         <ul class="chips"><li>Записка Word</li><li>Макросы КОМПАС-3D</li><li>Чертежи</li><li>DXF</li></ul>
         <div class="card-f"><span class="last" data-last>Ещё не открывали</span><span class="go">Открыть →</span></div>
       </a>
+      <a class="card eco" href="eco-pdv/" data-app="eco-pdv">
+        <div class="card-e">Промышленная экология</div>
+        <div class="card-h"><span class="tile"><svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 27h22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M9 27V15h5v12M18 27v-7l6 3v4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="12.5" cy="10" r="2.4" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.6" cy="7" r="2.9" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="23.6" cy="5.4" r="2" fill="none" stroke="currentColor" stroke-width="1.9"/></svg></span>
+          <div><b>Промышленная экология · ПДВ</b><small>Рассеивание выбросов, Cmax и ПДВ</small></div></div>
+        <p>Задачи 1.1 и 1.2: наибольшие приземные концентрации CO, NO₂, SO₂ и пыли, сравнение с ПДК, нормативы ПДВ, степень очистки и выбор пылеуловителя.</p>
+        <table class="stamp"><tr><td class="k">Варианты</td><td>1–22, табл. 1.2 и 1.3</td></tr><tr><td class="k">Разделы</td><td>Данные + этапы 1–3, сводка</td></tr></table>
+        <ul class="chips"><li>Отчёт Word</li><li>Графики C(x)</li><li>Сводка по вариантам</li><li>CSV</li></ul>
+        <div class="card-f"><span class="last" data-last>Ещё не открывали</span><span class="go">Открыть →</span></div>
+      </a>
     </div>
   </section>
 
@@ -235,9 +246,10 @@ h1 { font: 700 30px/1.15 var(--f-disp); letter-spacing: .01em; margin: 6px 0 8px
   var READ = {
     'sapr-labs': function (a) { return a.P && a.P.variant ? 'вариант ' + a.P.variant : ''; },
     'krrs-robot': function (a) { return a.P ? (a.P.variant ? 'вариант ' + a.P.variant : 'пример методички') : ''; },
-    'op-coursework': function (a) { return a.P && a.P.listNo ? '№ ' + a.P.listNo + ' (зад. ' + a.P.task + ', вар. ' + a.P.v + ')' : ''; }
+    'op-coursework': function (a) { return a.P && a.P.listNo ? '№ ' + a.P.listNo + ' (зад. ' + a.P.task + ', вар. ' + a.P.v + ')' : ''; },
+    'eco-pdv': function (a) { return a.P && a.P.variant ? 'задача 1.' + (+a.P.task === 2 ? 2 : 1) + ', вариант ' + a.P.variant : ''; }
   };
-  var KEY = { 'sapr-labs': 'ep-autosave', 'krrs-robot': 'rb-autosave', 'op-coursework': 'op-autosave' };
+  var KEY = { 'sapr-labs': 'ep-autosave', 'krrs-robot': 'rb-autosave', 'op-coursework': 'op-autosave', 'eco-pdv': 'eco-autosave' };
   function when(t) {
     var d = new Date(t), now = new Date(), p = function (x) { return String(x).padStart(2, '0'); };
     var hm = p(d.getHours()) + ':' + p(d.getMinutes());
