@@ -1,0 +1,507 @@
+/* =====================================================================
+   МАТЕРИАЛЫ «АЭРО» — общий внешний вид всех утилит (идёт после базовой разметки выше).
+   «Аэро» — скевоморфизм в духе Mac OS X Aqua и Windows Vista/7 (Frutiger Aero).
+   Материалы: гель (кнопки и сферы цвета утилиты), серебро (вторичные кнопки), стекло (шапка, рамки окон, колонка),
+   бумага (содержимое). Свет падает сверху: блик в верхней половине, каустика снизу, тиснёный текст.
+   Цвет геля — --brand (одинаков в обеих темах), небо тонировано им же. */
+:root {
+  --f-disp: "PT Sans", "Segoe UI", "Lucida Grande", sans-serif;
+  --f-body: "PT Sans", "Segoe UI", "Lucida Grande", sans-serif;
+  --f-mono: "PT Mono", Consolas, "Courier New", monospace;
+  --r: 6px;
+  --gel-hi: color-mix(in srgb, var(--brand) 55%, #fff);
+  --gel-lo: color-mix(in srgb, var(--brand) 72%, #000);
+  --gel-edge: color-mix(in srgb, var(--brand) 62%, #000);
+  --gel: radial-gradient(ellipse 94% 56% at 50% 0%, rgba(255,255,255,.82) 0%, rgba(255,255,255,.30) 66%, rgba(255,255,255,0) 68%),
+         radial-gradient(ellipse 70% 55% at 50% 112%, color-mix(in srgb, var(--brand) 20%, #fff) 0%, transparent 72%),
+         linear-gradient(180deg, color-mix(in srgb, var(--brand) 78%, #fff) 0%, var(--brand) 52%, var(--gel-lo) 100%);
+  --gel-hover: radial-gradient(ellipse 94% 56% at 50% 0%, rgba(255,255,255,.9) 0%, rgba(255,255,255,.36) 66%, rgba(255,255,255,0) 68%),
+         radial-gradient(ellipse 70% 60% at 50% 112%, color-mix(in srgb, var(--brand) 10%, #fff) 0%, transparent 74%),
+         linear-gradient(180deg, color-mix(in srgb, var(--brand) 68%, #fff) 0%, color-mix(in srgb, var(--brand) 88%, #fff) 52%, var(--brand) 100%);
+  --orb: radial-gradient(ellipse 64% 42% at 50% 13%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.2) 78%, transparent 80%),
+         radial-gradient(circle at 50% 118%, color-mix(in srgb, var(--brand) 25%, #fff) 0%, var(--brand) 58%, var(--gel-lo) 100%);
+  --silver: radial-gradient(ellipse 94% 56% at 50% 0%, rgba(255,255,255,1) 0%, rgba(255,255,255,.55) 66%, rgba(255,255,255,0) 68%),
+         linear-gradient(180deg, #fdfeff 0%, #e6edf3 50%, #d7e1ea 51%, #edf3f8 100%);
+  --silver-hover: radial-gradient(ellipse 94% 56% at 50% 0%, #fff 0%, rgba(255,255,255,.6) 66%, rgba(255,255,255,0) 68%),
+         linear-gradient(180deg, #ffffff 0%, color-mix(in srgb, var(--brand) 8%, #eef4f9) 50%, color-mix(in srgb, var(--brand) 16%, #dfeaf4) 51%, color-mix(in srgb, var(--brand) 6%, #f2f7fb) 100%);
+  --silver-edge: #8d9cab; --silver-edge-top: #b1bfcb; --silver-edge-bot: #6f7f8e;
+  --silver-ink: #1d2a37; --emboss: 0 1px 0 rgba(255,255,255,.9);
+  --orb-silver: radial-gradient(ellipse 64% 42% at 50% 13%, #fff 0%, rgba(255,255,255,.3) 78%, transparent 80%), radial-gradient(circle at 50% 118%, #ffffff 0%, #cfd9e3 58%, #9fafbe 100%);
+  --glass: linear-gradient(180deg, rgba(255,255,255,.66) 0%, rgba(255,255,255,.34) 48%, rgba(255,255,255,.14) 49.5%, rgba(255,255,255,.30) 100%),
+         repeating-linear-gradient(112deg, transparent 0 80px, rgba(255,255,255,.16) 80px 132px, transparent 132px 230px, rgba(255,255,255,.08) 230px 250px, transparent 250px 330px),
+         color-mix(in srgb, var(--brand) 22%, rgba(196,226,250,.55));
+  --glass-edge: rgba(12,40,72,.48); --glass-in: inset 0 0 0 1px rgba(255,255,255,.62), inset 0 1px 0 rgba(255,255,255,.9);
+  --chrome: linear-gradient(180deg, #ffffff 0%, #f5f9fc 48%, #e9f1f8 49%, #f1f6fb 100%);
+  --paper: #ffffff;
+  --frame-line: rgba(30,60,95,.30);
+  --field: linear-gradient(180deg, #e9eef3 0, #fbfcfd 4px, #ffffff 100%);
+  --field-edge: #a2b1bf; --field-top: #7c8d9c;
+  --well: linear-gradient(180deg, color-mix(in srgb, var(--brand) 3%, #fff) 0%, color-mix(in srgb, var(--brand) 7%, #f3f7fb) 100%);
+  --well-edge: color-mix(in srgb, var(--brand) 20%, #c3d0dc);
+  --sel: linear-gradient(180deg, color-mix(in srgb, var(--brand) 5%, #fff) 0%, color-mix(in srgb, var(--brand) 20%, #fff) 100%);
+  --sel-hover: linear-gradient(180deg, color-mix(in srgb, var(--brand) 2%, #fff) 0%, color-mix(in srgb, var(--brand) 10%, #fff) 100%);
+  --sel-edge: color-mix(in srgb, var(--brand) 45%, #fff);
+  --title: color-mix(in srgb, var(--brand) 62%, #0d2236);
+  --halo: 0 0 0 1px color-mix(in srgb, var(--brand) 70%, transparent), 0 0 8px 2px color-mix(in srgb, var(--brand) 55%, transparent);
+  --sky: radial-gradient(48% 34% at 82% -4%, rgba(255,255,255,.95), rgba(255,255,255,0) 70%),
+         linear-gradient(180deg, color-mix(in srgb, var(--brand) 55%, #1c8fe2) 0%, color-mix(in srgb, var(--brand) 22%, #74c4f5) 34%, #cdebfb 66%, #f4fbff 100%);
+  --ribbons: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 1000%22 preserveAspectRatio=%22none%22%3E%3Cdefs%3E%3ClinearGradient id=%22a%22 x1=%220%22 x2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23fff%22 stop-opacity=%220%22/%3E%3Cstop offset=%22.42%22 stop-color=%22%23fff%22 stop-opacity=%220.6%22/%3E%3Cstop offset=%22.7%22 stop-color=%22%23fff%22 stop-opacity=%220.36%22/%3E%3Cstop offset=%221%22 stop-color=%22%23fff%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22b%22 x1=%220%22 x2=%220%22 y1=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23fff%22 stop-opacity=%220.54%22/%3E%3Cstop offset=%221%22 stop-color=%22%23fff%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%22M-100 610C300 470 620 780 1010 600S1480 480 1700 560L1700 640C1460 580 1220 720 920 715S300 610-100 700Z%22 fill=%22url(%23a)%22/%3E%3Cpath d=%22M-100 700C380 590 720 840 1120 690S1520 640 1700 700L1700 722C1410 690 1160 812 860 790S250 712-100 760Z%22 fill=%22url(%23a)%22 opacity=%22.7%22/%3E%3Cpath d=%22M-100 520C360 420 820 650 1220 500S1600 450 1700 470L1700 486C1500 476 1260 590 1000 598S400 492-100 548Z%22 fill=%22url(%23a)%22 opacity=%22.8%22/%3E%3Cpath d=%22M-100 640C300 500 620 810 1010 630S1480 510 1700 590%22 fill=%22none%22 stroke=%22%23fff%22 stroke-opacity=%220.60%22 stroke-width=%221.5%22/%3E%3Cpath d=%22M-100 1000V820C400 720 900 900 1700 780V1000Z%22 fill=%22url(%23b)%22 opacity=%22.55%22/%3E%3C/svg%3E");
+  --bub-o: 1;
+  --eyebrow: var(--brand);
+  --top-glass: linear-gradient(180deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.50) 48%, rgba(255,255,255,.30) 49.5%, rgba(255,255,255,.46) 100%), repeating-linear-gradient(112deg, transparent 0 80px, rgba(255,255,255,.18) 80px 132px, transparent 132px 230px), color-mix(in srgb, var(--brand) 14%, rgba(214,236,252,.7));
+}
+:root[data-theme="dark"] {
+  --silver: radial-gradient(ellipse 94% 56% at 50% 0%, rgba(255,255,255,.26) 0%, rgba(255,255,255,.07) 66%, rgba(255,255,255,0) 68%), linear-gradient(180deg, #4b5663 0%, #313a45 50%, #262e37 51%, #343e4a 100%);
+  --silver-hover: radial-gradient(ellipse 94% 56% at 50% 0%, rgba(255,255,255,.3) 0%, rgba(255,255,255,.09) 66%, rgba(255,255,255,0) 68%), linear-gradient(180deg, #56626f 0%, #3a4552 50%, #2d3641 51%, #3d4857 100%);
+  --silver-edge: #070b10; --silver-edge-top: #11171e; --silver-edge-bot: #000; --silver-ink: #eef3f8; --emboss: 0 -1px 0 rgba(0,0,0,.8);
+  --orb-silver: radial-gradient(ellipse 64% 42% at 50% 13%, rgba(255,255,255,.5) 0%, rgba(255,255,255,.08) 78%, transparent 80%), radial-gradient(circle at 50% 118%, #6c7988 0%, #3b4551 58%, #1d242c 100%);
+  --glass: linear-gradient(180deg, rgba(255,255,255,.20) 0%, rgba(255,255,255,.08) 48%, rgba(255,255,255,.02) 49.5%, rgba(255,255,255,.07) 100%),
+         repeating-linear-gradient(112deg, transparent 0 80px, rgba(255,255,255,.05) 80px 132px, transparent 132px 230px, rgba(255,255,255,.03) 230px 250px, transparent 250px 330px),
+         color-mix(in srgb, var(--brand) 30%, rgba(8,18,32,.62));
+  --glass-edge: rgba(0,0,0,.75); --glass-in: inset 0 0 0 1px rgba(255,255,255,.12), inset 0 1px 0 rgba(255,255,255,.22);
+  --chrome: linear-gradient(180deg, #2c3846 0%, #222c38 48%, #1a222c 49%, #212a35 100%);
+  --paper: #121921; --frame-line: rgba(0,0,0,.7);
+  --field: linear-gradient(180deg, #05080c 0, #0d131a 4px, #111820 100%); --field-edge: #000; --field-top: #000;
+  --well: linear-gradient(180deg, #19222c 0%, #141b23 100%); --well-edge: #070b0f;
+  --sel: linear-gradient(180deg, color-mix(in srgb, var(--brand) 42%, #22303e) 0%, color-mix(in srgb, var(--brand) 62%, #0e1620) 100%);
+  --sel-hover: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02)); --sel-edge: color-mix(in srgb, var(--brand) 55%, #000);
+  --title: #f2f7fc;
+  --sky: radial-gradient(50% 40% at 80% 0%, color-mix(in srgb, var(--brand) 40%, rgba(120,200,255,.35)), transparent 70%),
+         linear-gradient(180deg, #02050c 0%, color-mix(in srgb, var(--brand) 30%, #071631) 55%, color-mix(in srgb, var(--brand) 45%, #0b2147) 100%);
+  --ribbons: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 1000%22 preserveAspectRatio=%22none%22%3E%3Cdefs%3E%3ClinearGradient id=%22a%22 x1=%220%22 x2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%239fe3ff%22 stop-opacity=%220%22/%3E%3Cstop offset=%22.42%22 stop-color=%22%239fe3ff%22 stop-opacity=%220.22%22/%3E%3Cstop offset=%22.7%22 stop-color=%22%239fe3ff%22 stop-opacity=%220.13%22/%3E%3Cstop offset=%221%22 stop-color=%22%239fe3ff%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22b%22 x1=%220%22 x2=%220%22 y1=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%239fe3ff%22 stop-opacity=%220.20%22/%3E%3Cstop offset=%221%22 stop-color=%22%239fe3ff%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%22M-100 610C300 470 620 780 1010 600S1480 480 1700 560L1700 640C1460 580 1220 720 920 715S300 610-100 700Z%22 fill=%22url(%23a)%22/%3E%3Cpath d=%22M-100 700C380 590 720 840 1120 690S1520 640 1700 700L1700 722C1410 690 1160 812 860 790S250 712-100 760Z%22 fill=%22url(%23a)%22 opacity=%22.7%22/%3E%3Cpath d=%22M-100 520C360 420 820 650 1220 500S1600 450 1700 470L1700 486C1500 476 1260 590 1000 598S400 492-100 548Z%22 fill=%22url(%23a)%22 opacity=%22.8%22/%3E%3Cpath d=%22M-100 640C300 500 620 810 1010 630S1480 510 1700 590%22 fill=%22none%22 stroke=%22%239fe3ff%22 stroke-opacity=%220.22%22 stroke-width=%221.5%22/%3E%3Cpath d=%22M-100 1000V820C400 720 900 900 1700 780V1000Z%22 fill=%22url(%23b)%22 opacity=%22.55%22/%3E%3C/svg%3E");
+  --bub-o: .35;
+  --eyebrow: var(--accent);
+  --top-glass: var(--glass);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --silver: radial-gradient(ellipse 94% 56% at 50% 0%, rgba(255,255,255,.26) 0%, rgba(255,255,255,.07) 66%, rgba(255,255,255,0) 68%), linear-gradient(180deg, #4b5663 0%, #313a45 50%, #262e37 51%, #343e4a 100%);
+  --silver-hover: radial-gradient(ellipse 94% 56% at 50% 0%, rgba(255,255,255,.3) 0%, rgba(255,255,255,.09) 66%, rgba(255,255,255,0) 68%), linear-gradient(180deg, #56626f 0%, #3a4552 50%, #2d3641 51%, #3d4857 100%);
+  --silver-edge: #070b10; --silver-edge-top: #11171e; --silver-edge-bot: #000; --silver-ink: #eef3f8; --emboss: 0 -1px 0 rgba(0,0,0,.8);
+  --orb-silver: radial-gradient(ellipse 64% 42% at 50% 13%, rgba(255,255,255,.5) 0%, rgba(255,255,255,.08) 78%, transparent 80%), radial-gradient(circle at 50% 118%, #6c7988 0%, #3b4551 58%, #1d242c 100%);
+  --glass: linear-gradient(180deg, rgba(255,255,255,.20) 0%, rgba(255,255,255,.08) 48%, rgba(255,255,255,.02) 49.5%, rgba(255,255,255,.07) 100%),
+         repeating-linear-gradient(112deg, transparent 0 80px, rgba(255,255,255,.05) 80px 132px, transparent 132px 230px, rgba(255,255,255,.03) 230px 250px, transparent 250px 330px),
+         color-mix(in srgb, var(--brand) 30%, rgba(8,18,32,.62));
+  --glass-edge: rgba(0,0,0,.75); --glass-in: inset 0 0 0 1px rgba(255,255,255,.12), inset 0 1px 0 rgba(255,255,255,.22);
+  --chrome: linear-gradient(180deg, #2c3846 0%, #222c38 48%, #1a222c 49%, #212a35 100%);
+  --paper: #121921; --frame-line: rgba(0,0,0,.7);
+  --field: linear-gradient(180deg, #05080c 0, #0d131a 4px, #111820 100%); --field-edge: #000; --field-top: #000;
+  --well: linear-gradient(180deg, #19222c 0%, #141b23 100%); --well-edge: #070b0f;
+  --sel: linear-gradient(180deg, color-mix(in srgb, var(--brand) 42%, #22303e) 0%, color-mix(in srgb, var(--brand) 62%, #0e1620) 100%);
+  --sel-hover: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02)); --sel-edge: color-mix(in srgb, var(--brand) 55%, #000);
+  --title: #f2f7fc;
+  --sky: radial-gradient(50% 40% at 80% 0%, color-mix(in srgb, var(--brand) 40%, rgba(120,200,255,.35)), transparent 70%),
+         linear-gradient(180deg, #02050c 0%, color-mix(in srgb, var(--brand) 30%, #071631) 55%, color-mix(in srgb, var(--brand) 45%, #0b2147) 100%);
+  --ribbons: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 1000%22 preserveAspectRatio=%22none%22%3E%3Cdefs%3E%3ClinearGradient id=%22a%22 x1=%220%22 x2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%239fe3ff%22 stop-opacity=%220%22/%3E%3Cstop offset=%22.42%22 stop-color=%22%239fe3ff%22 stop-opacity=%220.22%22/%3E%3Cstop offset=%22.7%22 stop-color=%22%239fe3ff%22 stop-opacity=%220.13%22/%3E%3Cstop offset=%221%22 stop-color=%22%239fe3ff%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22b%22 x1=%220%22 x2=%220%22 y1=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%239fe3ff%22 stop-opacity=%220.20%22/%3E%3Cstop offset=%221%22 stop-color=%22%239fe3ff%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%22M-100 610C300 470 620 780 1010 600S1480 480 1700 560L1700 640C1460 580 1220 720 920 715S300 610-100 700Z%22 fill=%22url(%23a)%22/%3E%3Cpath d=%22M-100 700C380 590 720 840 1120 690S1520 640 1700 700L1700 722C1410 690 1160 812 860 790S250 712-100 760Z%22 fill=%22url(%23a)%22 opacity=%22.7%22/%3E%3Cpath d=%22M-100 520C360 420 820 650 1220 500S1600 450 1700 470L1700 486C1500 476 1260 590 1000 598S400 492-100 548Z%22 fill=%22url(%23a)%22 opacity=%22.8%22/%3E%3Cpath d=%22M-100 640C300 500 620 810 1010 630S1480 510 1700 590%22 fill=%22none%22 stroke=%22%239fe3ff%22 stroke-opacity=%220.22%22 stroke-width=%221.5%22/%3E%3Cpath d=%22M-100 1000V820C400 720 900 900 1700 780V1000Z%22 fill=%22url(%23b)%22 opacity=%22.55%22/%3E%3C/svg%3E");
+  --bub-o: .35;
+  --eyebrow: var(--accent);
+  --top-glass: var(--glass);
+} }
+
+/* ---------- небо: градиент, солнечный блик, световые ленты, пузыри ---------- */
+body { font-size: 15px; background: var(--ribbons) center 0 / 100% 100% no-repeat, var(--sky); background-attachment: fixed; }
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: var(--bub-o);
+  /* пузырь = блик (маленький эллипс внутри) + тело с ободом; оба слоя строго внутри своей плитки (closest-side) */
+  --bh: radial-gradient(ellipse 20% 14% at 36% 30%, rgba(255,255,255,.95), rgba(255,255,255,0));
+  --bb: radial-gradient(circle closest-side, rgba(255,255,255,.07) 0 52%, rgba(255,255,255,.16) 78%, rgba(255,255,255,.55) 93%, rgba(255,255,255,.18) 97%, rgba(255,255,255,0) 100%);
+  background: var(--bh) 6% 62% / 90px 90px no-repeat,
+              var(--bb) 6% 62% / 90px 90px no-repeat,
+              var(--bh) 12% 74% / 42px 42px no-repeat,
+              var(--bb) 12% 74% / 42px 42px no-repeat,
+              var(--bh) 3% 84% / 26px 26px no-repeat,
+              var(--bb) 3% 84% / 26px 26px no-repeat,
+              var(--bh) 93% 70% / 120px 120px no-repeat,
+              var(--bb) 93% 70% / 120px 120px no-repeat,
+              var(--bh) 86% 82% / 54px 54px no-repeat,
+              var(--bb) 86% 82% / 54px 54px no-repeat,
+              var(--bh) 97% 90% / 30px 30px no-repeat,
+              var(--bb) 97% 90% / 30px 30px no-repeat,
+              var(--bh) 52% 92% / 36px 36px no-repeat,
+              var(--bb) 52% 92% / 36px 36px no-repeat,
+              var(--bh) 74% 40% / 22px 22px no-repeat,
+              var(--bb) 74% 40% / 22px 22px no-repeat,
+              var(--bh) 22% 30% / 18px 18px no-repeat,
+              var(--bb) 22% 30% / 18px 18px no-repeat; }
+
+/* ---------- шапка: стеклянная панель окна ---------- */
+.top { background: var(--top-glass); backdrop-filter: blur(14px) saturate(1.7); -webkit-backdrop-filter: blur(14px) saturate(1.7); border-bottom: 1px solid var(--glass-edge); box-shadow: var(--glass-in), 0 2px 12px rgba(0,30,70,.18); }
+.brand { position: relative; }
+.brand svg { filter: drop-shadow(0 1px 1px rgba(0,0,0,.35)) drop-shadow(0 2px 6px color-mix(in srgb, var(--brand) 50%, transparent)); }
+.brand::before { content: ""; position: absolute; left: 1px; top: calc(50% - 16px); width: 32px; height: 15px; border-radius: 6px 6px 50% 50% / 6px 6px 40% 40%; background: linear-gradient(rgba(255,255,255,.75), rgba(255,255,255,.12)); pointer-events: none; z-index: 1; }
+.brand b { font: 700 19px/1.1 var(--f-disp); color: var(--title); text-shadow: var(--emboss), 0 0 14px rgba(255,255,255,.5); letter-spacing: 0; }
+.brand small { color: var(--title); }
+.var-ctl label { color: var(--title); text-shadow: var(--emboss); opacity: .8; }
+
+/* ---------- серебряные и гелевые кнопки ---------- */
+.btn, .icon-btn, .calc-btn, .toc-top { background: var(--silver); color: var(--silver-ink); border: 1px solid var(--silver-edge); border-top-color: var(--silver-edge-top); border-bottom-color: var(--silver-edge-bot);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.35), 0 1px 2px rgba(0,25,55,.22); text-shadow: var(--emboss); border-radius: 999px; }
+.btn { padding: 6px 16px; font-weight: 700; font-size: 14px; }
+.btn.sm { padding: 3px 11px; font-size: 13px; }
+.btn:hover, .icon-btn:hover, .calc-btn:hover { background: var(--silver-hover); color: var(--silver-ink); border-color: color-mix(in srgb, var(--brand) 55%, var(--silver-edge)); }
+.btn:active, .icon-btn:active, .calc-btn:active { box-shadow: inset 0 2px 4px rgba(0,25,55,.35); background: var(--silver-hover); }
+.btn.primary, .toc-fab { background: var(--gel); color: #fff; border: 1px solid var(--gel-edge); border-bottom-color: color-mix(in srgb, var(--brand) 45%, #000);
+  text-shadow: 0 -1px 0 rgba(0,0,0,.35); box-shadow: inset 0 0 0 1px rgba(255,255,255,.22), 0 1px 2px rgba(0,20,50,.35), 0 3px 10px -2px color-mix(in srgb, var(--brand) 65%, transparent); }
+.btn.primary:hover, .toc-fab:hover { background: var(--gel-hover); color: #fff; filter: none; }
+.btn.primary:active { box-shadow: inset 0 2px 5px rgba(0,0,0,.35); }
+.icon-btn { width: 36px; height: 36px; border-radius: 50%; }
+.calc-btn { border-radius: 8px; }
+:focus-visible { outline: none; box-shadow: var(--halo) !important; }
+
+/* выбор варианта: серебряная капсула со стрелками и «окошком» */
+.var-box { background: var(--silver); border: 1px solid var(--silver-edge); border-top-color: var(--silver-edge-top); border-bottom-color: var(--silver-edge-bot); border-radius: 999px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.35), 0 1px 2px rgba(0,25,55,.22); }
+.var-box button { color: var(--silver-ink); text-shadow: var(--emboss); font-weight: 700; }
+.var-box button:hover { background: rgba(255,255,255,.35); }
+.var-box select { margin: 3px 0; border: 1px solid var(--field-edge); border-top-color: var(--field-top); border-radius: 5px; background: var(--field); box-shadow: inset 0 1px 2px rgba(0,0,0,.12); color: var(--fg); }
+
+/* ---------- окно-лист: стеклянная рамка, «командная строка», бумага ---------- */
+.sheet { padding: 7px; border-radius: 10px; border: 1px solid var(--glass-edge); background: var(--glass); backdrop-filter: blur(16px) saturate(1.6); -webkit-backdrop-filter: blur(16px) saturate(1.6); box-shadow: var(--glass-in), 0 14px 40px -6px rgba(0,30,70,.4), 0 2px 6px rgba(0,30,70,.18); }
+.sheet-head { background: var(--chrome); border: 1px solid var(--frame-line); border-bottom: 0; border-radius: 6px 6px 0 0; box-shadow: inset 0 1px 0 rgba(255,255,255,.95); padding: 20px 24px 16px; position: relative; }
+.sheet-head::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--brand) 55%, transparent) 20%, color-mix(in srgb, var(--brand) 55%, transparent) 80%, transparent); }
+.sheet-body { background: var(--paper); border: 1px solid var(--frame-line); border-top: 0; border-radius: 0 0 6px 6px; padding: 8px 24px 26px; }
+.sheet-head .eyebrow { color: var(--eyebrow); text-shadow: var(--emboss); }
+.sheet-head h1 { font: 700 clamp(24px, 3vw, 34px)/1.12 var(--f-disp); color: var(--title); letter-spacing: 0; text-shadow: var(--emboss), 0 0 20px rgba(255,255,255,.7); }
+.stamp { background: var(--paper); box-shadow: 0 1px 3px rgba(0,30,60,.18); }
+
+.rep h2 { font: 700 21px/1.25 var(--f-disp); color: var(--title); letter-spacing: 0; border-bottom: 0; padding-bottom: 8px; position: relative; text-shadow: var(--emboss); }
+.rep h2::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--brand), color-mix(in srgb, var(--brand) 45%, #fff) 35%, transparent 85%); box-shadow: 0 1px 0 rgba(255,255,255,.6); }
+.data-page h3 { color: var(--title); }
+
+/* сферы: номера этапов, разделов, шагов, слотов */
+.data-page .dno, .step-top .step-no, .slot:not(.empty) .slot-no { background: var(--orb); color: #fff; border: 1px solid var(--gel-edge); text-shadow: 0 -1px 0 rgba(0,0,0,.4); box-shadow: 0 1px 3px rgba(0,25,55,.35), inset 0 -1px 2px rgba(255,255,255,.35); }
+.data-page .dno { width: 30px; height: 30px; font: 700 15px var(--f-body); }
+
+/* ---------- колонка этапов: стеклянная панель, выделение как в Проводнике ---------- */
+@media (min-width: 961px) {
+  nav.rail { padding: 6px; border-radius: 10px; border: 1px solid var(--glass-edge); background: var(--glass); backdrop-filter: blur(16px) saturate(1.6); -webkit-backdrop-filter: blur(16px) saturate(1.6); box-shadow: var(--glass-in), 0 10px 30px -8px rgba(0,30,70,.35); }
+  nav.rail > a { border-radius: 5px; border: 1px solid transparent; padding: 8px 9px; }
+  nav.rail > a .no { width: 32px; height: 32px; padding: 0; border: 0; display: grid; place-items: center; border-radius: 50%; font: 700 15px var(--f-body); background: var(--orb-silver); color: var(--silver-ink); box-shadow: 0 1px 2px rgba(0,25,55,.35), inset 0 0 0 1px rgba(0,30,60,.25); text-shadow: var(--emboss); justify-self: center; }
+  nav.rail > a:hover { background: var(--sel-hover); border-color: color-mix(in srgb, var(--sel-edge) 60%, transparent); }
+  nav.rail > a[aria-current="page"] { background: var(--sel); border-color: var(--sel-edge); box-shadow: inset 0 0 0 1px rgba(255,255,255,.7), 0 1px 2px rgba(0,30,60,.12); }
+  nav.rail > a[aria-current="page"] .no { background: var(--orb); color: #fff; text-shadow: 0 -1px 0 rgba(0,0,0,.4); box-shadow: 0 1px 3px rgba(0,25,55,.45), inset 0 0 0 1px var(--gel-edge); }
+  nav.rail > a .t { color: var(--fg); text-shadow: var(--emboss); }
+  nav.rail > a .s { color: color-mix(in srgb, var(--fg) 80%, var(--muted)); }
+  .rail-toc { border-left: 1px dotted color-mix(in srgb, var(--fg) 30%, transparent); }
+  .rail-toc a { border-radius: 4px; border: 1px solid transparent; }
+  .rail-toc a:hover { background: var(--sel-hover); }
+  .rail-toc a.on { background: var(--sel); border-color: var(--sel-edge); color: var(--title); }
+  .rail .rail-foot { border: 1px solid var(--well-edge); border-radius: 6px; background: var(--well); box-shadow: inset 0 1px 2px rgba(0,30,60,.12); }
+}
+
+/* ---------- поля: вдавленные, с ореолом фокуса ---------- */
+.fld input, .fld select, .fld textarea, .chk-row input, select.txt { background: var(--field); border: 1px solid var(--field-edge); border-top-color: var(--field-top); border-radius: 5px; box-shadow: inset 0 1px 2px rgba(0,0,0,.12), 0 1px 0 rgba(255,255,255,.5); font-size: 15px; }
+.fld input:focus, .fld select:focus, .fld textarea:focus, .chk-row input:focus { border-color: var(--brand); box-shadow: inset 0 1px 2px rgba(0,0,0,.12), var(--halo); }
+.fld.changed input { background: linear-gradient(180deg, color-mix(in srgb, var(--accent-2) 22%, #fff) 0, color-mix(in srgb, var(--accent-2) 9%, #fff) 5px, color-mix(in srgb, var(--accent-2) 6%, #fff) 100%); border-color: color-mix(in srgb, var(--accent-2) 60%, #000); }
+:root[data-theme="dark"] .fld.changed input { background: linear-gradient(180deg, #000, color-mix(in srgb, var(--accent-2) 16%, #111820) 5px); }
+.fld .inp .unit { background: none; }
+.fld label { font-weight: 700; color: color-mix(in srgb, var(--fg) 72%, transparent); }
+
+/* ---------- сегменты и переключатели ---------- */
+.seg { background: var(--silver); border: 1px solid var(--silver-edge); border-top-color: var(--silver-edge-top); border-bottom-color: var(--silver-edge-bot); border-radius: 999px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.35), 0 1px 2px rgba(0,25,55,.2); }
+.seg button { color: var(--silver-ink); font-weight: 700; text-shadow: var(--emboss); }
+.seg button + button { border-left: 1px solid color-mix(in srgb, var(--silver-edge) 70%, transparent); }
+.seg button[aria-checked="true"] { background: var(--gel); color: #fff; text-shadow: 0 -1px 0 rgba(0,0,0,.35); box-shadow: inset 0 1px 3px rgba(0,0,0,.25); }
+.sw .track { width: 46px; height: 24px; border-radius: 12px; background: var(--field); border: 1px solid var(--field-edge); box-shadow: inset 0 1px 3px rgba(0,0,0,.25); }
+.sw .track::after { top: 1px; left: 1px; width: 20px; height: 20px; background: var(--orb-silver); box-shadow: 0 1px 2px rgba(0,0,0,.4), inset 0 0 0 1px rgba(0,30,60,.25); }
+.sw input:checked + .track { background: var(--gel); border-color: var(--gel-edge); }
+.sw input:checked + .track::after { transform: translateX(22px); }
+
+/* ---------- карточки, панели, таблицы ---------- */
+.calc { background: var(--well); border: 1px solid var(--well-edge); border-radius: 7px; box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 1px 2px rgba(0,30,60,.08); }
+.calc-desc { border-top: 1px dotted var(--well-edge); }
+.opts, .opt-list, details.adv, .files, figure.fig, .tbl { border: 1px solid color-mix(in srgb, var(--brand) 18%, #a9b9c8); border-radius: 7px; box-shadow: 0 1px 3px rgba(0,30,60,.12); }
+:root[data-theme="dark"] :is(details.adv, .files, figure.fig, .tbl) { border-color: #05080c; }
+details.adv > summary, .files-head, figure.fig figcaption, .tbl th, .tbl caption { background: var(--chrome); text-shadow: var(--emboss); }
+details.adv > summary { border-radius: 6px; }
+details.adv > summary::after { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; background: var(--orb-silver); font-size: 14px; box-shadow: 0 1px 2px rgba(0,25,55,.3); }
+.kpis { border: 0; gap: 8px; overflow: visible; }
+.kpi { border: 1px solid var(--well-edge); border-radius: 7px; margin: 0; background: var(--chrome); box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 1px 2px rgba(0,30,60,.1); }
+.kpi .v { color: var(--title); text-shadow: var(--emboss); }
+.note { border-radius: 6px; border: 1px solid color-mix(in srgb, var(--brand) 30%, #fff); border-left-width: 1px; background: linear-gradient(180deg, color-mix(in srgb, var(--brand) 6%, #fff), color-mix(in srgb, var(--brand) 12%, #fff)); box-shadow: inset 0 1px 0 #fff; }
+:root[data-theme="dark"] .note { background: var(--well); border-color: var(--well-edge); }
+.check { border-radius: 6px; box-shadow: inset 0 1px 0 rgba(255,255,255,.7); }
+.check .mark { background: radial-gradient(ellipse 64% 42% at 50% 13%, rgba(255,255,255,.9), rgba(255,255,255,.15) 78%, transparent 80%), var(--ok); box-shadow: 0 1px 2px rgba(0,0,0,.3); }
+.check.bad .mark { background: radial-gradient(ellipse 64% 42% at 50% 13%, rgba(255,255,255,.9), rgba(255,255,255,.15) 78%, transparent 80%), var(--bad); }
+
+/* ---------- всплывающее: стеклянные окна и подсказки ---------- */
+.toast { background: linear-gradient(180deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,.08) 49%, rgba(255,255,255,0) 50%), rgba(12,28,48,.86); color: #fff; border: 1px solid rgba(0,0,0,.6); box-shadow: inset 0 0 0 1px rgba(255,255,255,.22), 0 8px 24px rgba(0,0,0,.35); border-radius: 8px; backdrop-filter: blur(10px); }
+.modal { border: 1px solid var(--glass-edge); background: var(--paper); border-radius: 10px; box-shadow: 0 0 0 7px color-mix(in srgb, var(--brand) 25%, rgba(200,225,245,.75)), 0 0 0 8px var(--glass-edge), 0 24px 60px rgba(0,20,50,.45); }
+.modal-back { background: rgba(5,20,40,.35); backdrop-filter: blur(3px); }
+.suite-pop { background: var(--glass), var(--paper); backdrop-filter: blur(16px); border: 1px solid var(--glass-edge); box-shadow: var(--glass-in), 0 14px 40px rgba(0,30,70,.35); }
+.suite-it.cur { background: var(--sel); box-shadow: inset 0 0 0 1px var(--sel-edge); }
+
+/* ---------- телефон ---------- */
+@media (max-width: 960px) {
+  nav.rail { background: var(--glass); backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid var(--glass-edge); box-shadow: var(--glass-in); }
+  .rail a { background: var(--silver); border: 1px solid var(--silver-edge); border-radius: 999px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.35), 0 1px 2px rgba(0,25,55,.2); }
+  .rail a .no, .rail a .no::after { color: var(--silver-ink); text-shadow: var(--emboss); }
+  .rail a[aria-current="page"] { background: var(--gel); border-color: var(--gel-edge); }
+  .rail a[aria-current="page"] .no, .rail a[aria-current="page"] .no::after { color: #fff; text-shadow: 0 -1px 0 rgba(0,0,0,.35); }
+  .sheet { padding: 5px; border-radius: 9px; }
+  .sheet-head { padding: 16px 14px 14px; } .sheet-body { padding: 4px 14px 20px; }
+  .toc-fab { border-radius: 999px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* ---------- тёмная тема «Aero Black»: холодный графит, мягкий акцент; цвет утилиты — в геле и стекле ---------- */
+:root:root[data-theme="dark"] {
+  --fg: #e8f0f7; --muted: #a2b3c4; --line: rgba(150,190,230,.12); --line-strong: rgba(150,190,230,.22);
+  --accent: color-mix(in srgb, var(--brand) 42%, #d3e8ff); --accent-soft: color-mix(in srgb, var(--brand) 30%, #0d151f); --accent-ink: #06101c;
+  --sheet: color-mix(in srgb, var(--brand) 6%, #111821); --sheet-2: color-mix(in srgb, var(--brand) 8%, #161f29); --calc-bg: #141c25; --plot-bg: color-mix(in srgb, var(--brand) 6%, #111821);
+  --paper: color-mix(in srgb, var(--brand) 6%, #111821);
+}
+@media (prefers-color-scheme: dark) { :root:root:not([data-theme="light"]) {
+  --fg: #e8f0f7; --muted: #a2b3c4; --line: rgba(150,190,230,.12); --line-strong: rgba(150,190,230,.22);
+  --accent: color-mix(in srgb, var(--brand) 42%, #d3e8ff); --accent-soft: color-mix(in srgb, var(--brand) 30%, #0d151f); --accent-ink: #06101c;
+  --sheet: color-mix(in srgb, var(--brand) 6%, #111821); --sheet-2: color-mix(in srgb, var(--brand) 8%, #161f29); --calc-bg: #141c25; --plot-bg: color-mix(in srgb, var(--brand) 6%, #111821);
+  --paper: color-mix(in srgb, var(--brand) 6%, #111821);
+} }
+:root { --panel-edge: color-mix(in srgb, var(--brand) 16%, #a7b7c6); --stamp-edge: #8b9cad; --stamp-line: #c9d4de; --zebra: color-mix(in srgb, var(--brand) 3%, #fafcfe);
+  --halo-soft: 0 0 0 1px var(--brand), 0 0 10px 1px color-mix(in srgb, var(--brand) 38%, transparent); --etch: inset 0 1px 0 rgba(255,255,255,.8); }
+:root[data-theme="dark"] { --panel-edge: #04070b; --stamp-edge: #04070b; --stamp-line: rgba(150,190,230,.12); --zebra: rgba(255,255,255,.025); --etch: inset 0 1px 0 rgba(255,255,255,.05);
+  --halo-soft: 0 0 0 1px color-mix(in srgb, var(--brand) 70%, #9fd0ff), 0 0 12px 1px color-mix(in srgb, var(--brand) 55%, transparent); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --panel-edge: #04070b; --stamp-edge: #04070b; --stamp-line: rgba(150,190,230,.12); --zebra: rgba(255,255,255,.025); --etch: inset 0 1px 0 rgba(255,255,255,.05);
+  --halo-soft: 0 0 0 1px color-mix(in srgb, var(--brand) 70%, #9fd0ff), 0 0 12px 1px color-mix(in srgb, var(--brand) 55%, transparent); } }
+
+/* ---------- штамп — табличка: глянцевые ключи, бумажные значения ---------- */
+.stamp { border: 1px solid var(--stamp-edge); border-collapse: separate; border-spacing: 0; border-radius: 6px; overflow: hidden; background: var(--paper); box-shadow: 0 1px 0 rgba(255,255,255,.7), 0 3px 8px -2px rgba(0,30,60,.25); }
+.stamp td { border: 0; border-right: 1px solid var(--stamp-line); border-bottom: 1px solid var(--stamp-line); }
+.stamp tr:last-child td { border-bottom: 0; } .stamp td:last-child { border-right: 0; }
+.stamp td.k { background: var(--chrome); text-shadow: var(--emboss); color: var(--muted); font-weight: 700; }
+
+/* ---------- группы настроек (как group box Aqua/Win7) ---------- */
+.opts { border: 1px solid var(--panel-edge); border-radius: 8px; background: var(--paper); box-shadow: var(--etch), 0 1px 3px rgba(0,30,60,.12); overflow: hidden; }
+.opt + .opt { border-top: 1px solid var(--line); box-shadow: var(--etch); }
+.opt-t b { color: var(--title); text-shadow: var(--emboss); }
+.slot.auto { background: var(--chrome); }
+
+/* превью «что меняется»: колодец с глянцевой шапкой; выбранный — с ореолом */
+.ex { border: 1px solid var(--well-edge); border-radius: 7px; background: var(--well); box-shadow: var(--etch); overflow: hidden; }
+.ex.on { border-color: var(--brand); box-shadow: var(--halo-soft); }
+.ex-h { background: var(--chrome); border-bottom: 1px solid var(--well-edge); color: var(--muted); text-shadow: var(--emboss); font: 700 12px/1.2 var(--f-body); padding: 6px 10px; }
+.ex.on .ex-h { background: var(--sel); color: var(--title); border-bottom-color: var(--sel-edge); }
+.ex-h span, .ex-tbl td span { background: var(--gel); color: #fff; border: 1px solid var(--gel-edge); text-shadow: 0 -1px 0 rgba(0,0,0,.35); box-shadow: 0 1px 1px rgba(0,20,50,.25); border-radius: 999px; padding: 2px 7px; letter-spacing: .04em; }
+.ex-paper { box-shadow: 0 1px 3px rgba(0,0,0,.18); }
+.ex-note { border: 1px solid var(--well-edge); border-left: 3px solid var(--accent-2); background: var(--well); border-radius: 6px; }
+
+/* таблицы: глянцевая строка-заголовок, «зебра», выбранная строка — как в Проводнике */
+.ex-tbl { border-collapse: separate; border-spacing: 0; }
+.ex-tbl th { background: var(--chrome); color: var(--muted); text-shadow: var(--emboss); border-bottom: 1px solid var(--well-edge); padding: 6px 10px; font-weight: 700; }
+.ex-tbl td { padding: 5px 10px; border-bottom: 1px solid var(--line); color: color-mix(in srgb, var(--fg) 78%, transparent); }
+.ex-tbl tr:nth-child(even) td { background: var(--zebra); }
+.ex-tbl tr.on td, .var-table tr.on td { background: var(--sel); color: var(--title); font-weight: 700; box-shadow: inset 0 1px 0 rgba(255,255,255,.7), inset 0 -1px 0 var(--sel-edge); }
+.tbl { background: var(--paper); }
+.tbl tr:nth-child(even) td { background: var(--zebra); }
+.var-table tr:hover td { background: var(--sel-hover); }
+.tbl th { font-weight: 700; color: var(--muted); }
+
+/* код и прочие панели */
+.code { border: 1px solid var(--panel-edge); border-radius: 7px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,30,60,.12); }
+.code-head { background: var(--chrome); text-shadow: var(--emboss); }
+.modal-card { border: 1px solid var(--well-edge); background: var(--well); box-shadow: var(--etch); }
+.kpi .v small { text-shadow: none; }
+
+/*@hub*/
+
+/* ========== материалы «Аэро» — те же, что в утилитах (suite.css); здесь — версия для хаба ========== */
+:root { --brand: #1f6fc4; }
+:root {
+  --f-disp: "PT Sans", "Segoe UI", "Lucida Grande", sans-serif;
+  --f-body: "PT Sans", "Segoe UI", "Lucida Grande", sans-serif;
+  --f-mono: "PT Mono", Consolas, "Courier New", monospace;
+  --r: 6px;
+  --gel-hi: color-mix(in srgb, var(--brand) 55%, #fff);
+  --gel-lo: color-mix(in srgb, var(--brand) 72%, #000);
+  --gel-edge: color-mix(in srgb, var(--brand) 62%, #000);
+  --gel: radial-gradient(ellipse 94% 56% at 50% 0%, rgba(255,255,255,.82) 0%, rgba(255,255,255,.30) 66%, rgba(255,255,255,0) 68%),
+         radial-gradient(ellipse 70% 55% at 50% 112%, color-mix(in srgb, var(--brand) 20%, #fff) 0%, transparent 72%),
+         linear-gradient(180deg, color-mix(in srgb, var(--brand) 78%, #fff) 0%, var(--brand) 52%, var(--gel-lo) 100%);
+  --gel-hover: radial-gradient(ellipse 94% 56% at 50% 0%, rgba(255,255,255,.9) 0%, rgba(255,255,255,.36) 66%, rgba(255,255,255,0) 68%),
+         radial-gradient(ellipse 70% 60% at 50% 112%, color-mix(in srgb, var(--brand) 10%, #fff) 0%, transparent 74%),
+         linear-gradient(180deg, color-mix(in srgb, var(--brand) 68%, #fff) 0%, color-mix(in srgb, var(--brand) 88%, #fff) 52%, var(--brand) 100%);
+  --orb: radial-gradient(ellipse 64% 42% at 50% 13%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.2) 78%, transparent 80%),
+         radial-gradient(circle at 50% 118%, color-mix(in srgb, var(--brand) 25%, #fff) 0%, var(--brand) 58%, var(--gel-lo) 100%);
+  --silver: radial-gradient(ellipse 94% 56% at 50% 0%, rgba(255,255,255,1) 0%, rgba(255,255,255,.55) 66%, rgba(255,255,255,0) 68%),
+         linear-gradient(180deg, #fdfeff 0%, #e6edf3 50%, #d7e1ea 51%, #edf3f8 100%);
+  --silver-hover: radial-gradient(ellipse 94% 56% at 50% 0%, #fff 0%, rgba(255,255,255,.6) 66%, rgba(255,255,255,0) 68%),
+         linear-gradient(180deg, #ffffff 0%, color-mix(in srgb, var(--brand) 8%, #eef4f9) 50%, color-mix(in srgb, var(--brand) 16%, #dfeaf4) 51%, color-mix(in srgb, var(--brand) 6%, #f2f7fb) 100%);
+  --silver-edge: #8d9cab; --silver-edge-top: #b1bfcb; --silver-edge-bot: #6f7f8e;
+  --silver-ink: #1d2a37; --emboss: 0 1px 0 rgba(255,255,255,.9);
+  --orb-silver: radial-gradient(ellipse 64% 42% at 50% 13%, #fff 0%, rgba(255,255,255,.3) 78%, transparent 80%), radial-gradient(circle at 50% 118%, #ffffff 0%, #cfd9e3 58%, #9fafbe 100%);
+  --glass: linear-gradient(180deg, rgba(255,255,255,.66) 0%, rgba(255,255,255,.34) 48%, rgba(255,255,255,.14) 49.5%, rgba(255,255,255,.30) 100%),
+         repeating-linear-gradient(112deg, transparent 0 80px, rgba(255,255,255,.16) 80px 132px, transparent 132px 230px, rgba(255,255,255,.08) 230px 250px, transparent 250px 330px),
+         color-mix(in srgb, var(--brand) 22%, rgba(196,226,250,.55));
+  --glass-edge: rgba(12,40,72,.48); --glass-in: inset 0 0 0 1px rgba(255,255,255,.62), inset 0 1px 0 rgba(255,255,255,.9);
+  --chrome: linear-gradient(180deg, #ffffff 0%, #f5f9fc 48%, #e9f1f8 49%, #f1f6fb 100%);
+  --paper: #ffffff;
+  --frame-line: rgba(30,60,95,.30);
+  --field: linear-gradient(180deg, #e9eef3 0, #fbfcfd 4px, #ffffff 100%);
+  --field-edge: #a2b1bf; --field-top: #7c8d9c;
+  --well: linear-gradient(180deg, color-mix(in srgb, var(--brand) 3%, #fff) 0%, color-mix(in srgb, var(--brand) 7%, #f3f7fb) 100%);
+  --well-edge: color-mix(in srgb, var(--brand) 20%, #c3d0dc);
+  --sel: linear-gradient(180deg, color-mix(in srgb, var(--brand) 5%, #fff) 0%, color-mix(in srgb, var(--brand) 20%, #fff) 100%);
+  --sel-hover: linear-gradient(180deg, color-mix(in srgb, var(--brand) 2%, #fff) 0%, color-mix(in srgb, var(--brand) 10%, #fff) 100%);
+  --sel-edge: color-mix(in srgb, var(--brand) 45%, #fff);
+  --title: color-mix(in srgb, var(--brand) 62%, #0d2236);
+  --halo: 0 0 0 1px color-mix(in srgb, var(--brand) 70%, transparent), 0 0 8px 2px color-mix(in srgb, var(--brand) 55%, transparent);
+  --sky: radial-gradient(48% 34% at 82% -4%, rgba(255,255,255,.95), rgba(255,255,255,0) 70%),
+         linear-gradient(180deg, color-mix(in srgb, var(--brand) 55%, #1c8fe2) 0%, color-mix(in srgb, var(--brand) 22%, #74c4f5) 34%, #cdebfb 66%, #f4fbff 100%);
+  --ribbons: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 1000%22 preserveAspectRatio=%22none%22%3E%3Cdefs%3E%3ClinearGradient id=%22a%22 x1=%220%22 x2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23fff%22 stop-opacity=%220%22/%3E%3Cstop offset=%22.42%22 stop-color=%22%23fff%22 stop-opacity=%220.6%22/%3E%3Cstop offset=%22.7%22 stop-color=%22%23fff%22 stop-opacity=%220.36%22/%3E%3Cstop offset=%221%22 stop-color=%22%23fff%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22b%22 x1=%220%22 x2=%220%22 y1=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23fff%22 stop-opacity=%220.54%22/%3E%3Cstop offset=%221%22 stop-color=%22%23fff%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%22M-100 610C300 470 620 780 1010 600S1480 480 1700 560L1700 640C1460 580 1220 720 920 715S300 610-100 700Z%22 fill=%22url(%23a)%22/%3E%3Cpath d=%22M-100 700C380 590 720 840 1120 690S1520 640 1700 700L1700 722C1410 690 1160 812 860 790S250 712-100 760Z%22 fill=%22url(%23a)%22 opacity=%22.7%22/%3E%3Cpath d=%22M-100 520C360 420 820 650 1220 500S1600 450 1700 470L1700 486C1500 476 1260 590 1000 598S400 492-100 548Z%22 fill=%22url(%23a)%22 opacity=%22.8%22/%3E%3Cpath d=%22M-100 640C300 500 620 810 1010 630S1480 510 1700 590%22 fill=%22none%22 stroke=%22%23fff%22 stroke-opacity=%220.60%22 stroke-width=%221.5%22/%3E%3Cpath d=%22M-100 1000V820C400 720 900 900 1700 780V1000Z%22 fill=%22url(%23b)%22 opacity=%22.55%22/%3E%3C/svg%3E");
+  --bub-o: 1;
+  --eyebrow: var(--brand);
+  --top-glass: linear-gradient(180deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.50) 48%, rgba(255,255,255,.30) 49.5%, rgba(255,255,255,.46) 100%), repeating-linear-gradient(112deg, transparent 0 80px, rgba(255,255,255,.18) 80px 132px, transparent 132px 230px), color-mix(in srgb, var(--brand) 14%, rgba(214,236,252,.7));
+}
+:root[data-theme="dark"] {
+  --silver: radial-gradient(ellipse 94% 56% at 50% 0%, rgba(255,255,255,.26) 0%, rgba(255,255,255,.07) 66%, rgba(255,255,255,0) 68%), linear-gradient(180deg, #4b5663 0%, #313a45 50%, #262e37 51%, #343e4a 100%);
+  --silver-hover: radial-gradient(ellipse 94% 56% at 50% 0%, rgba(255,255,255,.3) 0%, rgba(255,255,255,.09) 66%, rgba(255,255,255,0) 68%), linear-gradient(180deg, #56626f 0%, #3a4552 50%, #2d3641 51%, #3d4857 100%);
+  --silver-edge: #070b10; --silver-edge-top: #11171e; --silver-edge-bot: #000; --silver-ink: #eef3f8; --emboss: 0 -1px 0 rgba(0,0,0,.8);
+  --orb-silver: radial-gradient(ellipse 64% 42% at 50% 13%, rgba(255,255,255,.5) 0%, rgba(255,255,255,.08) 78%, transparent 80%), radial-gradient(circle at 50% 118%, #6c7988 0%, #3b4551 58%, #1d242c 100%);
+  --glass: linear-gradient(180deg, rgba(255,255,255,.20) 0%, rgba(255,255,255,.08) 48%, rgba(255,255,255,.02) 49.5%, rgba(255,255,255,.07) 100%),
+         repeating-linear-gradient(112deg, transparent 0 80px, rgba(255,255,255,.05) 80px 132px, transparent 132px 230px, rgba(255,255,255,.03) 230px 250px, transparent 250px 330px),
+         color-mix(in srgb, var(--brand) 30%, rgba(8,18,32,.62));
+  --glass-edge: rgba(0,0,0,.75); --glass-in: inset 0 0 0 1px rgba(255,255,255,.12), inset 0 1px 0 rgba(255,255,255,.22);
+  --chrome: linear-gradient(180deg, #2c3846 0%, #222c38 48%, #1a222c 49%, #212a35 100%);
+  --paper: #121921; --frame-line: rgba(0,0,0,.7);
+  --field: linear-gradient(180deg, #05080c 0, #0d131a 4px, #111820 100%); --field-edge: #000; --field-top: #000;
+  --well: linear-gradient(180deg, #19222c 0%, #141b23 100%); --well-edge: #070b0f;
+  --sel: linear-gradient(180deg, color-mix(in srgb, var(--brand) 42%, #22303e) 0%, color-mix(in srgb, var(--brand) 62%, #0e1620) 100%);
+  --sel-hover: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02)); --sel-edge: color-mix(in srgb, var(--brand) 55%, #000);
+  --title: #f2f7fc;
+  --sky: radial-gradient(50% 40% at 80% 0%, color-mix(in srgb, var(--brand) 40%, rgba(120,200,255,.35)), transparent 70%),
+         linear-gradient(180deg, #02050c 0%, color-mix(in srgb, var(--brand) 30%, #071631) 55%, color-mix(in srgb, var(--brand) 45%, #0b2147) 100%);
+  --ribbons: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 1000%22 preserveAspectRatio=%22none%22%3E%3Cdefs%3E%3ClinearGradient id=%22a%22 x1=%220%22 x2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%239fe3ff%22 stop-opacity=%220%22/%3E%3Cstop offset=%22.42%22 stop-color=%22%239fe3ff%22 stop-opacity=%220.22%22/%3E%3Cstop offset=%22.7%22 stop-color=%22%239fe3ff%22 stop-opacity=%220.13%22/%3E%3Cstop offset=%221%22 stop-color=%22%239fe3ff%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22b%22 x1=%220%22 x2=%220%22 y1=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%239fe3ff%22 stop-opacity=%220.20%22/%3E%3Cstop offset=%221%22 stop-color=%22%239fe3ff%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%22M-100 610C300 470 620 780 1010 600S1480 480 1700 560L1700 640C1460 580 1220 720 920 715S300 610-100 700Z%22 fill=%22url(%23a)%22/%3E%3Cpath d=%22M-100 700C380 590 720 840 1120 690S1520 640 1700 700L1700 722C1410 690 1160 812 860 790S250 712-100 760Z%22 fill=%22url(%23a)%22 opacity=%22.7%22/%3E%3Cpath d=%22M-100 520C360 420 820 650 1220 500S1600 450 1700 470L1700 486C1500 476 1260 590 1000 598S400 492-100 548Z%22 fill=%22url(%23a)%22 opacity=%22.8%22/%3E%3Cpath d=%22M-100 640C300 500 620 810 1010 630S1480 510 1700 590%22 fill=%22none%22 stroke=%22%239fe3ff%22 stroke-opacity=%220.22%22 stroke-width=%221.5%22/%3E%3Cpath d=%22M-100 1000V820C400 720 900 900 1700 780V1000Z%22 fill=%22url(%23b)%22 opacity=%22.55%22/%3E%3C/svg%3E");
+  --bub-o: .35;
+  --eyebrow: var(--accent);
+  --top-glass: var(--glass);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --silver: radial-gradient(ellipse 94% 56% at 50% 0%, rgba(255,255,255,.26) 0%, rgba(255,255,255,.07) 66%, rgba(255,255,255,0) 68%), linear-gradient(180deg, #4b5663 0%, #313a45 50%, #262e37 51%, #343e4a 100%);
+  --silver-hover: radial-gradient(ellipse 94% 56% at 50% 0%, rgba(255,255,255,.3) 0%, rgba(255,255,255,.09) 66%, rgba(255,255,255,0) 68%), linear-gradient(180deg, #56626f 0%, #3a4552 50%, #2d3641 51%, #3d4857 100%);
+  --silver-edge: #070b10; --silver-edge-top: #11171e; --silver-edge-bot: #000; --silver-ink: #eef3f8; --emboss: 0 -1px 0 rgba(0,0,0,.8);
+  --orb-silver: radial-gradient(ellipse 64% 42% at 50% 13%, rgba(255,255,255,.5) 0%, rgba(255,255,255,.08) 78%, transparent 80%), radial-gradient(circle at 50% 118%, #6c7988 0%, #3b4551 58%, #1d242c 100%);
+  --glass: linear-gradient(180deg, rgba(255,255,255,.20) 0%, rgba(255,255,255,.08) 48%, rgba(255,255,255,.02) 49.5%, rgba(255,255,255,.07) 100%),
+         repeating-linear-gradient(112deg, transparent 0 80px, rgba(255,255,255,.05) 80px 132px, transparent 132px 230px, rgba(255,255,255,.03) 230px 250px, transparent 250px 330px),
+         color-mix(in srgb, var(--brand) 30%, rgba(8,18,32,.62));
+  --glass-edge: rgba(0,0,0,.75); --glass-in: inset 0 0 0 1px rgba(255,255,255,.12), inset 0 1px 0 rgba(255,255,255,.22);
+  --chrome: linear-gradient(180deg, #2c3846 0%, #222c38 48%, #1a222c 49%, #212a35 100%);
+  --paper: #121921; --frame-line: rgba(0,0,0,.7);
+  --field: linear-gradient(180deg, #05080c 0, #0d131a 4px, #111820 100%); --field-edge: #000; --field-top: #000;
+  --well: linear-gradient(180deg, #19222c 0%, #141b23 100%); --well-edge: #070b0f;
+  --sel: linear-gradient(180deg, color-mix(in srgb, var(--brand) 42%, #22303e) 0%, color-mix(in srgb, var(--brand) 62%, #0e1620) 100%);
+  --sel-hover: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02)); --sel-edge: color-mix(in srgb, var(--brand) 55%, #000);
+  --title: #f2f7fc;
+  --sky: radial-gradient(50% 40% at 80% 0%, color-mix(in srgb, var(--brand) 40%, rgba(120,200,255,.35)), transparent 70%),
+         linear-gradient(180deg, #02050c 0%, color-mix(in srgb, var(--brand) 30%, #071631) 55%, color-mix(in srgb, var(--brand) 45%, #0b2147) 100%);
+  --ribbons: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1600 1000%22 preserveAspectRatio=%22none%22%3E%3Cdefs%3E%3ClinearGradient id=%22a%22 x1=%220%22 x2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%239fe3ff%22 stop-opacity=%220%22/%3E%3Cstop offset=%22.42%22 stop-color=%22%239fe3ff%22 stop-opacity=%220.22%22/%3E%3Cstop offset=%22.7%22 stop-color=%22%239fe3ff%22 stop-opacity=%220.13%22/%3E%3Cstop offset=%221%22 stop-color=%22%239fe3ff%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22b%22 x1=%220%22 x2=%220%22 y1=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%239fe3ff%22 stop-opacity=%220.20%22/%3E%3Cstop offset=%221%22 stop-color=%22%239fe3ff%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%22M-100 610C300 470 620 780 1010 600S1480 480 1700 560L1700 640C1460 580 1220 720 920 715S300 610-100 700Z%22 fill=%22url(%23a)%22/%3E%3Cpath d=%22M-100 700C380 590 720 840 1120 690S1520 640 1700 700L1700 722C1410 690 1160 812 860 790S250 712-100 760Z%22 fill=%22url(%23a)%22 opacity=%22.7%22/%3E%3Cpath d=%22M-100 520C360 420 820 650 1220 500S1600 450 1700 470L1700 486C1500 476 1260 590 1000 598S400 492-100 548Z%22 fill=%22url(%23a)%22 opacity=%22.8%22/%3E%3Cpath d=%22M-100 640C300 500 620 810 1010 630S1480 510 1700 590%22 fill=%22none%22 stroke=%22%239fe3ff%22 stroke-opacity=%220.22%22 stroke-width=%221.5%22/%3E%3Cpath d=%22M-100 1000V820C400 720 900 900 1700 780V1000Z%22 fill=%22url(%23b)%22 opacity=%22.55%22/%3E%3C/svg%3E");
+  --bub-o: .35;
+  --eyebrow: var(--accent);
+  --top-glass: var(--glass);
+} }
+
+:root { --panel-edge: color-mix(in srgb, var(--brand) 16%, #a7b7c6); --stamp-edge: #8b9cad; --stamp-line: #c9d4de; --zebra: color-mix(in srgb, var(--brand) 3%, #fafcfe);
+  --halo-soft: 0 0 0 1px var(--brand), 0 0 10px 1px color-mix(in srgb, var(--brand) 38%, transparent); --etch: inset 0 1px 0 rgba(255,255,255,.8); }
+:root[data-theme="dark"] { --panel-edge: #04070b; --stamp-edge: #04070b; --stamp-line: rgba(150,190,230,.12); --zebra: rgba(255,255,255,.025); --etch: inset 0 1px 0 rgba(255,255,255,.05);
+  --halo-soft: 0 0 0 1px color-mix(in srgb, var(--brand) 70%, #9fd0ff), 0 0 12px 1px color-mix(in srgb, var(--brand) 55%, transparent); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --panel-edge: #04070b; --stamp-edge: #04070b; --stamp-line: rgba(150,190,230,.12); --zebra: rgba(255,255,255,.025); --etch: inset 0 1px 0 rgba(255,255,255,.05);
+  --halo-soft: 0 0 0 1px color-mix(in srgb, var(--brand) 70%, #9fd0ff), 0 0 12px 1px color-mix(in srgb, var(--brand) 55%, transparent); } }
+
+body { font-size: 15px; background: var(--ribbons) center 0 / 100% 100% no-repeat, var(--sky); background-attachment: fixed; }
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: var(--bub-o);
+  /* пузырь = блик (маленький эллипс внутри) + тело с ободом; оба слоя строго внутри своей плитки (closest-side) */
+  --bh: radial-gradient(ellipse 20% 14% at 36% 30%, rgba(255,255,255,.95), rgba(255,255,255,0));
+  --bb: radial-gradient(circle closest-side, rgba(255,255,255,.07) 0 52%, rgba(255,255,255,.16) 78%, rgba(255,255,255,.55) 93%, rgba(255,255,255,.18) 97%, rgba(255,255,255,0) 100%);
+  background: var(--bh) 6% 62% / 90px 90px no-repeat,
+              var(--bb) 6% 62% / 90px 90px no-repeat,
+              var(--bh) 12% 74% / 42px 42px no-repeat,
+              var(--bb) 12% 74% / 42px 42px no-repeat,
+              var(--bh) 3% 84% / 26px 26px no-repeat,
+              var(--bb) 3% 84% / 26px 26px no-repeat,
+              var(--bh) 93% 70% / 120px 120px no-repeat,
+              var(--bb) 93% 70% / 120px 120px no-repeat,
+              var(--bh) 86% 82% / 54px 54px no-repeat,
+              var(--bb) 86% 82% / 54px 54px no-repeat,
+              var(--bh) 97% 90% / 30px 30px no-repeat,
+              var(--bb) 97% 90% / 30px 30px no-repeat,
+              var(--bh) 52% 92% / 36px 36px no-repeat,
+              var(--bb) 52% 92% / 36px 36px no-repeat,
+              var(--bh) 74% 40% / 22px 22px no-repeat,
+              var(--bb) 74% 40% / 22px 22px no-repeat,
+              var(--bh) 22% 30% / 18px 18px no-repeat,
+              var(--bb) 22% 30% / 18px 18px no-repeat; }
+
+
+.top { background: var(--top-glass); backdrop-filter: blur(14px) saturate(1.7); -webkit-backdrop-filter: blur(14px) saturate(1.7); border-bottom: 1px solid var(--glass-edge); box-shadow: var(--glass-in), 0 2px 12px rgba(0,30,70,.18); }
+.brand b { font: 700 19px/1.1 var(--f-disp); color: var(--title); text-shadow: var(--emboss), 0 0 14px rgba(255,255,255,.5); letter-spacing: 0; }
+.brand small { color: var(--title); }
+.brand svg { filter: drop-shadow(0 1px 1px rgba(0,0,0,.35)) drop-shadow(0 2px 6px rgba(0,40,90,.35)); }
+.icon-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--silver); color: var(--silver-ink); border: 1px solid var(--silver-edge); border-top-color: var(--silver-edge-top); border-bottom-color: var(--silver-edge-bot); box-shadow: inset 0 0 0 1px rgba(255,255,255,.35), 0 1px 2px rgba(0,25,55,.22); }
+.icon-btn:hover { background: var(--silver-hover); border-color: color-mix(in srgb, var(--brand) 55%, var(--silver-edge)); }
+:focus-visible { outline: none; box-shadow: var(--halo) !important; }
+
+/* вступление лежит на небе: небо за ним глубже, текст белый — как подписи рабочего стола Aero */
+:root[data-theme="light"] { --sky: radial-gradient(48% 34% at 82% -4%, rgba(255,255,255,.55), rgba(255,255,255,0) 70%), linear-gradient(180deg, #0c427f 0%, #135aa6 24%, #3f93d8 44%, #a6d6f6 64%, #e6f5fd 82%, #f6fbff 100%); }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --sky: radial-gradient(48% 34% at 82% -4%, rgba(255,255,255,.55), rgba(255,255,255,0) 70%), linear-gradient(180deg, #0c427f 0%, #135aa6 24%, #3f93d8 44%, #a6d6f6 64%, #e6f5fd 82%, #f6fbff 100%); } }
+.intro .eyebrow, .intro h1, .intro .lead { color: #fff; text-shadow: 0 1px 2px rgba(0,30,70,.55), 0 0 14px rgba(0,40,90,.35); }
+.intro .eyebrow { opacity: .92; }
+h1 { font: 700 34px/1.15 var(--f-disp); letter-spacing: 0; }
+.intro .lead { font-size: 15.5px; }
+
+/* карточка — окно: стеклянная рамка, шапка в цвете утилиты, бумага, строка состояния */
+.card.sapr { --brand: #0a5aa8; } .card.krrs { --brand: #5a3ea8; } .card.op { --brand: #0b6e62; } .card.eco { --brand: #557313; }
+/* переменные геля пересчитываются в каждой карточке — от её цвета */
+.card, .same { --gel-lo: color-mix(in srgb, var(--brand) 72%, #000); --gel-edge: color-mix(in srgb, var(--brand) 62%, #000);
+  --gel: radial-gradient(ellipse 94% 56% at 50% 0%, rgba(255,255,255,.82) 0%, rgba(255,255,255,.30) 66%, rgba(255,255,255,0) 68%), radial-gradient(ellipse 70% 55% at 50% 112%, color-mix(in srgb, var(--brand) 20%, #fff) 0%, transparent 72%), linear-gradient(180deg, color-mix(in srgb, var(--brand) 78%, #fff) 0%, var(--brand) 52%, var(--gel-lo) 100%);
+  --gel-hover: radial-gradient(ellipse 94% 56% at 50% 0%, rgba(255,255,255,.9) 0%, rgba(255,255,255,.36) 66%, rgba(255,255,255,0) 68%), radial-gradient(ellipse 70% 60% at 50% 112%, color-mix(in srgb, var(--brand) 10%, #fff) 0%, transparent 74%), linear-gradient(180deg, color-mix(in srgb, var(--brand) 68%, #fff) 0%, color-mix(in srgb, var(--brand) 88%, #fff) 52%, var(--brand) 100%);
+  --orb: radial-gradient(ellipse 64% 42% at 50% 13%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.2) 78%, transparent 80%), radial-gradient(circle at 50% 118%, color-mix(in srgb, var(--brand) 25%, #fff) 0%, var(--brand) 58%, var(--gel-lo) 100%);
+  --head-1: color-mix(in srgb, var(--brand) 13%, #fff); --head-2: color-mix(in srgb, var(--brand) 9%, #fff); --head-3: color-mix(in srgb, var(--brand) 4%, #fff);
+  --head-ink: color-mix(in srgb, var(--brand) 62%, #0d2236); --eye: var(--brand); }
+:root[data-theme="dark"] :is(.card, .same) { --head-1: color-mix(in srgb, var(--brand) 34%, #1e2834); --head-2: color-mix(in srgb, var(--brand) 26%, #19222c); --head-3: color-mix(in srgb, var(--brand) 18%, #151d26); --head-ink: #f2f7fc; --eye: color-mix(in srgb, var(--brand) 40%, #d3e8ff); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) :is(.card, .same) { --head-1: color-mix(in srgb, var(--brand) 34%, #1e2834); --head-2: color-mix(in srgb, var(--brand) 26%, #19222c); --head-3: color-mix(in srgb, var(--brand) 18%, #151d26); --head-ink: #f2f7fc; --eye: color-mix(in srgb, var(--brand) 40%, #d3e8ff); } }
+.cards { gap: 28px; padding: 7px; }
+.card { border: 1px solid var(--glass-edge); border-top: 1px solid var(--glass-edge); border-radius: 9px; background: var(--paper); overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.6), 0 0 0 6px color-mix(in srgb, var(--brand) 26%, rgba(205,230,250,.62)), 0 0 0 7px var(--glass-edge), 0 18px 40px -12px rgba(0,30,70,.45); transition: transform .15s, box-shadow .15s; }
+.card:hover { transform: translateY(-2px); border-color: var(--glass-edge); box-shadow: inset 0 0 0 1px rgba(255,255,255,.6), 0 0 0 6px color-mix(in srgb, var(--brand) 38%, rgba(205,230,250,.7)), 0 0 0 7px var(--glass-edge), 0 0 26px 6px color-mix(in srgb, var(--brand) 35%, transparent), 0 22px 46px -12px rgba(0,30,70,.5); }
+.card:focus-visible { box-shadow: inset 0 0 0 1px rgba(255,255,255,.6), 0 0 0 6px color-mix(in srgb, var(--brand) 38%, rgba(205,230,250,.7)), 0 0 0 7px var(--brand), 0 0 18px 8px color-mix(in srgb, var(--brand) 55%, transparent) !important; }
+.card-e { background: linear-gradient(180deg, var(--head-1), var(--head-2)); color: var(--eye); text-shadow: var(--emboss); }
+.card-h { background: linear-gradient(180deg, var(--head-2), var(--head-3)); border-bottom: 1px solid var(--line-strong); margin-bottom: 12px; }
+.card-h b { color: var(--head-ink); text-shadow: var(--emboss); font-size: 19px; }
+.tile { border-radius: 11px; background: var(--gel); color: #fff !important; border: 1px solid var(--gel-edge); box-shadow: inset 0 0 0 1px rgba(255,255,255,.25), 0 2px 6px color-mix(in srgb, var(--brand) 55%, transparent); }
+.tile svg { filter: drop-shadow(0 -1px 0 rgba(0,0,0,.3)); }
+.stamp { border: 1px solid var(--stamp-edge); border-collapse: separate; border-spacing: 0; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 0 rgba(255,255,255,.7), 0 2px 6px -2px rgba(0,30,60,.25); }
+.stamp td { border: 0; border-right: 1px solid var(--stamp-line); border-bottom: 1px solid var(--stamp-line); }
+.stamp tr:last-child td { border-bottom: 0; } .stamp td:last-child { border-right: 0; }
+.stamp td.k { background: var(--chrome); text-shadow: var(--emboss); font-weight: 700; }
+.chips li { background: var(--silver); color: var(--silver-ink); border: 1px solid var(--silver-edge); border-top-color: var(--silver-edge-top); text-shadow: var(--emboss); box-shadow: 0 1px 1px rgba(0,25,55,.15); font-weight: 700; }
+.card-f { border-top: 1px solid color-mix(in srgb, var(--brand) 22%, #c3d0dc); background: var(--chrome); box-shadow: inset 0 1px 0 rgba(255,255,255,.85); }
+.last { text-shadow: var(--emboss); }
+.go { background: var(--gel); color: #fff !important; border: 1px solid var(--gel-edge); border-radius: 999px; padding: 6px 16px; font-weight: 700; text-shadow: 0 -1px 0 rgba(0,0,0,.35); box-shadow: inset 0 0 0 1px rgba(255,255,255,.22), 0 2px 8px -2px color-mix(in srgb, var(--brand) 65%, transparent); }
+.card:hover .go { background: var(--gel-hover); }
+
+/* «Одинаковое устройство» — стеклянное окно с бумагой; номера — сферы */
+.same { position: relative; border: 1px solid var(--glass-edge); border-radius: 10px; background: var(--paper); margin: 22px 7px 0;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.6), 0 0 0 6px color-mix(in srgb, var(--brand) 22%, rgba(205,230,250,.6)), 0 0 0 7px var(--glass-edge), 0 18px 40px -12px rgba(0,30,70,.4); }
+.same h2 { color: var(--head-ink); text-shadow: var(--emboss); }
+.same .eyebrow { color: var(--eye); }
+.same li::before { background: var(--orb); color: #fff; border: 1px solid var(--gel-edge); text-shadow: 0 -1px 0 rgba(0,0,0,.4); width: 22px; height: 22px; box-shadow: 0 1px 2px rgba(0,25,55,.35); }
+.wf .fr { fill: color-mix(in srgb, var(--brand) 18%, #dcecf8); }
+.wf .mk circle { fill: var(--brand); }
+.foot { color: var(--title); text-shadow: var(--emboss); }
+@media (prefers-reduced-motion: reduce) { .card, .card:hover { transition: none; transform: none; } }
+/*@endhub*/
+
+/*@apps*/
+/* у каждой утилиты — свой знак, выдутый из стекла в углу «рабочего стола» */
+[data-app="sapr-labs"] body::after { content: ""; position: fixed; right: -4vw; bottom: -8vh; width: 46vw; height: 46vw; z-index: -1; pointer-events: none; opacity: .5;
+  background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Cpath d=%22M5 22c4 0 4-12 8-12s4 8 7 8 3-4 7-4%22 fill=%22none%22 stroke=%22white%22 stroke-width=%221.0%22 stroke-linecap=%22round%22/%3E%3C/svg%3E") center / contain no-repeat; filter: drop-shadow(0 0 18px rgba(255,255,255,.8)) drop-shadow(0 8px 24px rgba(0,40,90,.35)); }
+[data-app="krrs-robot"] body::after { content: ""; position: fixed; right: -4vw; bottom: -8vh; width: 46vw; height: 46vw; z-index: -1; pointer-events: none; opacity: .5;
+  background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect x=%2211%22 y=%225%22 width=%2210%22 height=%2215%22 rx=%222%22 fill=%22none%22 stroke=%22white%22 stroke-width=%221.0%22 transform=%22rotate(8 16 20)%22/%3E%3Ccircle cx=%2210%22 cy=%2223%22 r=%223.6%22 fill=%22none%22 stroke=%22white%22 stroke-width=%221.0%22/%3E%3Ccircle cx=%2222%22 cy=%2223%22 r=%223.6%22 fill=%22none%22 stroke=%22white%22 stroke-width=%221.0%22/%3E%3C/svg%3E") center / contain no-repeat; filter: drop-shadow(0 0 18px rgba(255,255,255,.8)) drop-shadow(0 8px 24px rgba(0,40,90,.35)); }
+[data-app="op-coursework"] body::after { content: ""; position: fixed; right: -4vw; bottom: -8vh; width: 46vw; height: 46vw; z-index: -1; pointer-events: none; opacity: .5;
+  background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2212%22 cy=%2217%22 r=%226.5%22 fill=%22none%22 stroke=%22white%22 stroke-width=%221.0%22/%3E%3Ccircle cx=%2223%22 cy=%2211%22 r=%224%22 fill=%22none%22 stroke=%22white%22 stroke-width=%221.0%22/%3E%3Cpath d=%22M12 10.5v-2M12 25.5v-2M5.5 17h-2M20.5 17h-2%22 stroke=%22white%22 stroke-width=%221.0%22/%3E%3C/svg%3E") center / contain no-repeat; filter: drop-shadow(0 0 18px rgba(255,255,255,.8)) drop-shadow(0 8px 24px rgba(0,40,90,.35)); }
+[data-app="eco-pdv"] body::after { content: ""; position: fixed; right: -4vw; bottom: -8vh; width: 46vw; height: 46vw; z-index: -1; pointer-events: none; opacity: .5;
+  background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Cpath d=%22M5 27h22%22 stroke=%22white%22 stroke-width=%221.0%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M9 27V15h5v12M18 27v-7l6 3v4%22 fill=%22none%22 stroke=%22white%22 stroke-width=%221.0%22 stroke-linejoin=%22round%22/%3E%3Ccircle cx=%2212.5%22 cy=%2210%22 r=%222.4%22 fill=%22none%22 stroke=%22white%22 stroke-width=%221.0%22/%3E%3Ccircle cx=%2217.6%22 cy=%227%22 r=%222.9%22 fill=%22none%22 stroke=%22white%22 stroke-width=%221.0%22/%3E%3Ccircle cx=%2223.6%22 cy=%225.4%22 r=%222%22 fill=%22none%22 stroke=%22white%22 stroke-width=%221.0%22/%3E%3C/svg%3E") center / contain no-repeat; filter: drop-shadow(0 0 18px rgba(255,255,255,.8)) drop-shadow(0 8px 24px rgba(0,40,90,.35)); }
+:root[data-theme="dark"] body::after { opacity: .22; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body::after { opacity: .22; } }
+@media (max-width: 960px) { body::after { display: none; } }
+
+/*@hub*/
+:root[data-theme="dark"] .foot { color: #e6eef6; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .foot { color: #e6eef6; } }
+/*@endhub*/

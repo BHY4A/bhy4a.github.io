@@ -1,0 +1,131 @@
+/* «Ночная лаборатория»: точечная сетка, растворяющаяся к краям; свечение акцента под шапкой;
+   карточки с градиентной кромкой; Geologica + JetBrains Mono. Тёмная тема — основная, светлая — та же логика. */
+:root {
+  --f-disp: "Geologica", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Geologica", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", Consolas, monospace;
+  --r: 10px;
+  --dot: rgba(20,30,45,.13);
+  --surf: linear-gradient(180deg, #ffffff, color-mix(in srgb, var(--accent) 2%, #fbfcfd));
+  --hair: rgba(20,30,45,.09);
+  --hair-hi: inset 0 1px 0 rgba(255,255,255,.9);
+  --glow: color-mix(in srgb, var(--accent) 22%, transparent);
+  --well: color-mix(in srgb, var(--fg) 3.5%, #fff);
+}
+:root[data-theme="dark"] { --bg: color-mix(in srgb, var(--accent) 4%, #08090c); --sheet: color-mix(in srgb, var(--accent) 3%, #0f1115); --sheet-2: color-mix(in srgb, var(--accent) 4%, #14161b); --line: rgba(255,255,255,.07); --line-strong: rgba(255,255,255,.14); --calc-bg: rgba(255,255,255,.025);
+  --dot: rgba(255,255,255,.09); --surf: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.012)); --hair: rgba(255,255,255,.08); --hair-hi: inset 0 1px 0 rgba(255,255,255,.06); --glow: color-mix(in srgb, var(--accent) 38%, transparent); --well: rgba(0,0,0,.28); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: color-mix(in srgb, var(--accent) 4%, #08090c); --sheet: color-mix(in srgb, var(--accent) 3%, #0f1115); --sheet-2: color-mix(in srgb, var(--accent) 4%, #14161b); --line: rgba(255,255,255,.07); --line-strong: rgba(255,255,255,.14); --calc-bg: rgba(255,255,255,.025);
+  --dot: rgba(255,255,255,.09); --surf: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.012)); --hair: rgba(255,255,255,.08); --hair-hi: inset 0 1px 0 rgba(255,255,255,.06); --glow: color-mix(in srgb, var(--accent) 38%, transparent); --well: rgba(0,0,0,.28); } }
+
+body { background: var(--bg); }
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle, var(--dot) 1px, transparent 1.4px) 0 0 / 22px 22px;
+  -webkit-mask-image: radial-gradient(90% 70% at 50% 0%, #000 30%, transparent 85%); mask-image: radial-gradient(90% 70% at 50% 0%, #000 30%, transparent 85%); }
+body::after { content: ""; position: fixed; left: 50%; top: -260px; width: min(1100px, 120vw); height: 520px; transform: translateX(-50%); z-index: -1; pointer-events: none;
+  background: radial-gradient(50% 50% at 50% 50%, var(--glow), transparent 70%); filter: blur(20px); }
+
+.top { background: color-mix(in srgb, var(--bg) 65%, transparent); backdrop-filter: blur(16px) saturate(1.4); border-bottom: 0; box-shadow: none; }
+.top::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 55%, transparent) 50%, transparent); }
+.brand svg { filter: drop-shadow(0 0 12px var(--glow)); }
+.brand b { font: 650 17px/1.15 var(--f-disp); letter-spacing: -.01em; }
+.var-ctl label { font: 500 11px var(--f-mono); letter-spacing: .06em; }
+.var-box, .icon-btn { background: var(--surf); border-color: var(--hair); box-shadow: var(--hair-hi); }
+.var-box select { background: transparent; color: var(--fg); }
+
+/* карточки с градиентной кромкой */
+.sheet, nav.rail > a[aria-current="page"], .calc, .opt, figure.fig, .files, .tbl, details.adv { position: relative; }
+.sheet { background: var(--surf), var(--sheet); border: 1px solid var(--hair); border-radius: 18px; box-shadow: var(--hair-hi), 0 30px 80px -40px rgba(0,0,0,.45); }
+.sheet::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; pointer-events: none;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 65%, transparent), transparent 28%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+.sheet-head { border-bottom-color: var(--hair); padding: 28px 30px 22px; }
+.sheet-head .eyebrow { font: 500 11.5px/1 var(--f-mono); letter-spacing: .04em; text-transform: none; display: inline-flex; align-items: center; gap: 8px; }
+.sheet-head .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent), 0 0 12px var(--accent); }
+.sheet-head h1 { font: 700 clamp(26px, 3.4vw, 40px)/1.05 var(--f-disp); letter-spacing: -.035em; margin: 14px 0 10px;
+  background: linear-gradient(180deg, var(--fg) 30%, color-mix(in srgb, var(--fg) 55%, var(--accent))); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.sheet-body { padding: 6px 30px 30px; }
+.stamp { border: 1px solid var(--line-strong); background: var(--well); border-radius: 10px; border-collapse: separate; border-spacing: 0; overflow: hidden; }
+.stamp td { border: 0; border-bottom: 1px solid var(--hair); border-right: 1px solid var(--hair); }
+.stamp tr:last-child td { border-bottom: 0; } .stamp td:last-child { border-right: 0; }
+.stamp td.k { font-family: var(--f-mono); font-size: 10.5px; }
+
+.rep h2 { font: 650 20px/1.25 var(--f-disp); letter-spacing: -.02em; border-bottom-color: var(--hair); }
+.data-page .dno { border-radius: 8px; font: 600 13px var(--f-mono); background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 45%, transparent), 0 0 16px -4px var(--accent); }
+.data-page h3 { font: 500 11.5px var(--f-mono); letter-spacing: .06em; }
+
+/* колонка: активный этап — подсвеченная полоса */
+@media (min-width: 961px) {
+  nav.rail > a { border-radius: 12px; }
+  nav.rail > a .no { font: 500 18px/1 var(--f-mono); border-right-color: var(--hair); }
+  nav.rail > a:hover { background: color-mix(in srgb, var(--fg) 4%, transparent); }
+  nav.rail > a[aria-current="page"] { background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 16%, transparent), transparent 85%); border-color: var(--hair); box-shadow: inset 2px 0 0 var(--accent), -6px 0 18px -10px var(--accent); }
+  .rail-toc { border-left-color: var(--hair); }
+  .rail-toc a.on { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+  .rail .rail-foot { border: 1px solid var(--hair); background: var(--surf); border-radius: 12px; font-family: var(--f-mono); font-size: 11.5px; }
+}
+
+/* поля */
+.fld input, .fld select, .fld textarea { height: 42px; border-radius: 10px; border: 1px solid var(--hair); background: var(--well); font: 500 14.5px var(--f-mono); transition: border-color .15s, box-shadow .15s; }
+.fld textarea { height: auto; font-family: var(--f-body); }
+.fld input:hover, .fld select:hover { border-color: var(--line-strong); }
+.fld input:focus, .fld select:focus { border-color: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent), 0 0 24px -6px var(--accent); }
+.fld.changed input { border-color: color-mix(in srgb, var(--accent-2) 60%, transparent); box-shadow: 0 0 18px -8px var(--accent-2); }
+
+/* кнопки */
+.btn, .calc-btn { border: 1px solid var(--hair); background: var(--surf), var(--sheet); box-shadow: var(--hair-hi); border-radius: 10px; transition: border-color .15s, box-shadow .15s; }
+.btn:hover, .calc-btn:hover { color: var(--fg); border-color: color-mix(in srgb, var(--accent) 55%, transparent); box-shadow: var(--hair-hi), 0 0 18px -8px var(--accent); }
+.btn.primary { background: var(--accent); border-color: color-mix(in srgb, var(--accent) 70%, #fff); color: var(--accent-ink); box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent), 0 8px 28px -8px var(--accent); }
+.btn.primary:hover { filter: brightness(1.06); color: var(--accent-ink); }
+.seg { border-color: var(--hair); background: var(--well); border-radius: 10px; }
+.seg button + button { border-left-color: var(--hair); }
+.seg button[aria-checked="true"] { box-shadow: 0 0 16px -4px var(--accent); }
+
+.calc { border: 1px solid var(--hair); border-radius: 14px; background: var(--well); box-shadow: var(--hair-hi); }
+.opt, figure.fig, .files, .tbl, details.adv, .slot { border-color: var(--hair); border-radius: 14px; background: var(--surf), var(--sheet); }
+.kpis { border-color: var(--hair); border-radius: 14px; background: var(--well); }
+.kpi { border-color: var(--hair); }
+.kpi .v { font: 600 19px/1.3 var(--f-mono); color: var(--fg); text-shadow: 0 0 22px var(--glow); }
+
+@media (max-width: 960px) {
+  nav.rail { background: color-mix(in srgb, var(--bg) 70%, transparent); backdrop-filter: blur(14px); }
+  .rail a { border-radius: 10px; border-color: var(--hair); background: var(--surf), var(--sheet); }
+  .rail a[aria-current="page"] { background: var(--accent); box-shadow: 0 0 20px -6px var(--accent); }
+  .sheet-head { padding: 22px 18px 18px; } .sheet-body { padding: 4px 18px 22px; }
+}
+
+nav.rail > a .s, .rail-toc a { color: color-mix(in srgb, var(--fg) 82%, var(--muted)); }
+
+/* у каждой утилиты — своя «миллиметровка»: осциллограф, фазовая плоскость, чертёжная сетка со штриховкой, изолинии рассеивания */
+[data-app="sapr-labs"] body::before { background: linear-gradient(var(--dot) 1px, transparent 1px) 0 0 / 100% 48px, linear-gradient(90deg, var(--dot) 1px, transparent 1px) 0 0 / 48px 100%, linear-gradient(var(--dot) 1px, transparent 1px) 0 0 / 100% 9.6px; }
+[data-app="krrs-robot"] body::before { background: repeating-radial-gradient(circle at 70% 40%, var(--dot) 0 1px, transparent 1.5px 56px), linear-gradient(90deg, transparent calc(70% - .5px), var(--dot) calc(70% - .5px) calc(70% + .5px), transparent 0), linear-gradient(transparent calc(40% - .5px), var(--dot) calc(40% - .5px) calc(40% + .5px), transparent 0); }
+[data-app="op-coursework"] body::before { background: linear-gradient(var(--dot) 1px, transparent 1px) 0 0 / 50px 50px, linear-gradient(90deg, var(--dot) 1px, transparent 1px) 0 0 / 50px 50px, repeating-linear-gradient(45deg, transparent 0 9px, color-mix(in srgb, var(--dot) 45%, transparent) 9px 10px); }
+[data-app="eco-pdv"] body::before { background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22240%22 height=%22240%22 viewBox=%220 0 240 240%22 fill=%22none%22 stroke=%22%23888%22 stroke-opacity=%22.55%22 stroke-width=%221%22%3E%3Cpath d=%22M-10 10 C 50 -8, 90 30, 130 10 S 210 -6, 250 10%22/%3E%3Cpath d=%22M-10 34 C 50 16, 90 54, 130 34 S 210 18, 250 34%22/%3E%3Cpath d=%22M-10 58 C 50 40, 90 78, 130 58 S 210 42, 250 58%22/%3E%3Cpath d=%22M-10 82 C 50 64, 90 102, 130 82 S 210 66, 250 82%22/%3E%3Cpath d=%22M-10 106 C 50 88, 90 126, 130 106 S 210 90, 250 106%22/%3E%3Cpath d=%22M-10 130 C 50 112, 90 150, 130 130 S 210 114, 250 130%22/%3E%3Cpath d=%22M-10 154 C 50 136, 90 174, 130 154 S 210 138, 250 154%22/%3E%3Cpath d=%22M-10 178 C 50 160, 90 198, 130 178 S 210 162, 250 178%22/%3E%3Cpath d=%22M-10 202 C 50 184, 90 222, 130 202 S 210 186, 250 202%22/%3E%3Cpath d=%22M-10 226 C 50 208, 90 246, 130 226 S 210 210, 250 226%22/%3E%3C/svg%3E") 0 0 / 240px 240px; }
+:root[data-theme="dark"][data-app="eco-pdv"] body::before { filter: invert(1); opacity: .5; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"])[data-app="eco-pdv"] body::before { filter: invert(1); opacity: .5; } }
+/*@hub*/
+.card { border-radius: 18px; border: 1px solid var(--hair); background: var(--surf), var(--sheet); }
+.intro h1 { font-family: var(--f-disp); letter-spacing: -.03em; }
+.go { border-radius: 10px; }
+.same { border-radius: 18px; border: 1px solid var(--hair); background: var(--surf), var(--sheet); }
+/*@endhub*/
+
+/* @bg:begin — сгенерировано: python at.py pipeline (стиль graphite); правки внутри блока будут перезаписаны */
+[data-app="sapr-labs"] body { background: #f7f8fa url(tx/gr-bg-sapr-labs-light.webp) center / cover fixed no-repeat; }
+:root[data-theme="dark"][data-app="sapr-labs"] body { background: #08090c url(tx/gr-bg-sapr-labs-dark.webp) center / cover fixed no-repeat; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"])[data-app="sapr-labs"] body { background: #08090c url(tx/gr-bg-sapr-labs-dark.webp) center / cover fixed no-repeat; } }
+[data-app="krrs-robot"] body { background: #f7f8fa url(tx/gr-bg-krrs-robot-light.webp) center / cover fixed no-repeat; }
+:root[data-theme="dark"][data-app="krrs-robot"] body { background: #08090c url(tx/gr-bg-krrs-robot-dark.webp) center / cover fixed no-repeat; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"])[data-app="krrs-robot"] body { background: #08090c url(tx/gr-bg-krrs-robot-dark.webp) center / cover fixed no-repeat; } }
+[data-app="op-coursework"] body { background: #f7f8fa url(tx/gr-bg-op-coursework-light.webp) center / cover fixed no-repeat; }
+:root[data-theme="dark"][data-app="op-coursework"] body { background: #08090c url(tx/gr-bg-op-coursework-dark.webp) center / cover fixed no-repeat; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"])[data-app="op-coursework"] body { background: #08090c url(tx/gr-bg-op-coursework-dark.webp) center / cover fixed no-repeat; } }
+[data-app="eco-pdv"] body { background: #f7f8fa url(tx/gr-bg-eco-pdv-light.webp) center / cover fixed no-repeat; }
+:root[data-theme="dark"][data-app="eco-pdv"] body { background: #08090c url(tx/gr-bg-eco-pdv-dark.webp) center / cover fixed no-repeat; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"])[data-app="eco-pdv"] body { background: #08090c url(tx/gr-bg-eco-pdv-dark.webp) center / cover fixed no-repeat; } }
+body::before, body::after { display: none; }
+/*@hub*/
+body { background: #f7f8fa url(tx/gr-bg-hub-light.webp) center / cover fixed no-repeat; }
+:root[data-theme="dark"] body { background: #08090c url(tx/gr-bg-hub-dark.webp) center / cover fixed no-repeat; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body { background: #08090c url(tx/gr-bg-hub-dark.webp) center / cover fixed no-repeat; } }
+/*@endhub*/
+/* @bg:end */
