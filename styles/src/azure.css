@@ -230,7 +230,7 @@ details.adv > summary::after { width: 18px; height: 18px; border-radius: 50%; di
 
 /* ---------- телефон ---------- */
 @media (max-width: 960px) {
-  nav.rail { background: var(--glass); backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid var(--glass-edge); box-shadow: var(--glass-in); }
+  nav.rail { background: var(--glass); backdrop-filter: blur(14px) saturate(1.6); -webkit-backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid var(--glass-edge); box-shadow: 0 6px 16px -12px rgba(0,30,70,.4); }
   .rail a { background: var(--silver); border: 1px solid var(--silver-edge); border-radius: 999px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.35), 0 1px 2px rgba(0,25,55,.2); }
   .rail a .no, .rail a .no::after { color: var(--silver-ink); text-shadow: var(--emboss); }
   .rail a[aria-current="page"] { background: var(--gel); border-color: var(--gel-edge); }

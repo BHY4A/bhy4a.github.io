@@ -4,7 +4,7 @@
    @keyframes переименовываются (<id>-имя), @font-face выбрасываются (шрифты грузит suite.js)."""
 import re,sys,os,shutil
 SRC,OUT=sys.argv[1],sys.argv[2]
-ORDER=['azure','aquarelle','glare','neon','ether','glass','graphite']
+ORDER=['azure']
 def strip_comments(t):
     out=[];i=0
     while i<len(t):
