@@ -14,7 +14,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<script src="js/suite.js?v=202610220800"></script>
+<script src="js/suite.js?v=202610222330"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jura:wght@500;600;700&display=swap">
@@ -257,9 +257,9 @@ html { -webkit-tap-highlight-color: transparent; }
       <a class="card eco" href="eco-pdv/" data-app="eco-pdv">
         <div class="card-e">Промышленная экология</div>
         <div class="card-h"><span class="tile"><svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 27h22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M9 27V15h5v12M18 27v-7l6 3v4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="12.5" cy="10" r="2.4" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.6" cy="7" r="2.9" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="23.6" cy="5.4" r="2" fill="none" stroke="currentColor" stroke-width="1.9"/></svg></span>
-          <div><b>Промышленная экология · ПДВ</b><small>Задачи 1.1–1.6: выбросы, ПДВ, ущерб</small></div></div>
-        <p>Задачи 1.1–1.6: приземные концентрации и нормативы ПДВ, фактический выброс, продукты сгорания топлива в ДВС, загазованность у автодороги, экономический ущерб и эффект от очистки.</p>
-        <table class="stamp"><tr><td class="k">Варианты</td><td>1–22, табл. 1.2–1.10</td></tr><tr><td class="k">Разделы</td><td>Данные + этапы 1–3, сводка</td></tr></table>
+          <div><b>Промышленная экология · ПДВ</b><small>Задачи 1.1–1.8: выбросы, ПДВ, ущерб</small></div></div>
+        <p>Задачи 1.1–1.8: приземные концентрации и нормативы ПДВ, фактический выброс, продукты сгорания топлива в ДВС, загазованность у автодороги, экономический ущерб по зонам загрязнения, укрупнённая оценка ущерба и эффект от очистки.</p>
+        <table class="stamp"><tr><td class="k">Варианты</td><td>1–22, табл. 1.2–1.19</td></tr><tr><td class="k">Разделы</td><td>Данные + этапы 1–3, сводка</td></tr></table>
         <ul class="chips"><li>Отчёт Word</li><li>Графики C(x)</li><li>Сводка по вариантам</li><li>CSV</li></ul>
         <div class="card-f"><span class="last" data-last>Ещё не открывали</span><span class="go">Открыть →</span></div>
       </a>
@@ -316,7 +316,7 @@ html { -webkit-tap-highlight-color: transparent; }
     'sapr-labs': function (a) { return a.P && a.P.variant ? 'вариант ' + a.P.variant : ''; },
     'krrs-robot': function (a) { return a.P ? (a.P.variant ? 'вариант ' + a.P.variant : 'пример методички') : ''; },
     'op-coursework': function (a) { return a.P && a.P.listNo ? '№ ' + a.P.listNo + ' (зад. ' + a.P.task + ', вар. ' + a.P.v + ')' : ''; },
-    'eco-pdv': function (a) { return a.P && a.P.variant ? 'задача 1.' + (+a.P.task >= 1 && +a.P.task <= 6 ? +a.P.task : 1) + ', вариант ' + a.P.variant : ''; }
+    'eco-pdv': function (a) { return a.P && a.P.variant ? 'задача 1.' + (+a.P.task >= 1 && +a.P.task <= 8 ? +a.P.task : 1) + ', вариант ' + a.P.variant : ''; }
   };
   var KEY = { 'sapr-labs': 'ep-autosave', 'krrs-robot': 'rb-autosave', 'op-coursework': 'op-autosave', 'eco-pdv': 'eco-autosave' };
   function when(t) {
