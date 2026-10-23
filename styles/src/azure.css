@@ -278,7 +278,7 @@ details.adv > summary::after { width: 18px; height: 18px; border-radius: 50%; di
 .ex.on { border-color: var(--brand); box-shadow: var(--halo-soft); }
 .ex-h { background: var(--chrome); border-bottom: 1px solid var(--well-edge); color: var(--muted); text-shadow: var(--emboss); font: 700 12px/1.2 var(--f-body); padding: 6px 10px; }
 .ex.on .ex-h { background: var(--sel); color: var(--title); border-bottom-color: var(--sel-edge); }
-.ex-h span, .ex-tbl td span { background: var(--gel); color: #fff; border: 1px solid var(--gel-edge); text-shadow: 0 -1px 0 rgba(0,0,0,.35); box-shadow: 0 1px 1px rgba(0,20,50,.25); border-radius: 999px; padding: 2px 7px; letter-spacing: .04em; }
+.ex-h .ex-now, .ex-tbl td span, .ex-tbl th span { background: var(--gel); color: #fff; border: 1px solid var(--gel-edge); text-shadow: 0 -1px 0 rgba(0,0,0,.35); box-shadow: 0 1px 1px rgba(0,20,50,.25); border-radius: 999px; padding: 2px 7px; letter-spacing: .04em; }
 .ex-paper { box-shadow: 0 1px 3px rgba(0,0,0,.18); }
 .ex-note { border: 1px solid var(--well-edge); border-left: 3px solid var(--accent-2); background: var(--well); border-radius: 6px; }
 

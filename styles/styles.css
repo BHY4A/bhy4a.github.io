@@ -243,7 +243,7 @@
 :root:root[data-style="azure"] .ex.on {border-color: var(--brand); box-shadow: var(--halo-soft);}
 :root:root[data-style="azure"] .ex-h {background: var(--chrome); border-bottom: 1px solid var(--well-edge); color: var(--muted); text-shadow: var(--emboss); font: 700 12px/1.2 var(--f-body); padding: 6px 10px;}
 :root:root[data-style="azure"] .ex.on .ex-h {background: var(--sel); color: var(--title); border-bottom-color: var(--sel-edge);}
-:root:root[data-style="azure"] .ex-h span, :root:root[data-style="azure"] .ex-tbl td span {background: var(--gel); color: #fff; border: 1px solid var(--gel-edge); text-shadow: 0 -1px 0 rgba(0,0,0,.35); box-shadow: 0 1px 1px rgba(0,20,50,.25); border-radius: 999px; padding: 2px 7px; letter-spacing: .04em;}
+:root:root[data-style="azure"] .ex-h .ex-now, :root:root[data-style="azure"] .ex-tbl td span, :root:root[data-style="azure"] .ex-tbl th span {background: var(--gel); color: #fff; border: 1px solid var(--gel-edge); text-shadow: 0 -1px 0 rgba(0,0,0,.35); box-shadow: 0 1px 1px rgba(0,20,50,.25); border-radius: 999px; padding: 2px 7px; letter-spacing: .04em;}
 :root:root[data-style="azure"] .ex-paper {box-shadow: 0 1px 3px rgba(0,0,0,.18);}
 :root:root[data-style="azure"] .ex-note {border: 1px solid var(--well-edge); border-left: 3px solid var(--accent-2); background: var(--well); border-radius: 6px;}
 :root:root[data-style="azure"] .ex-tbl {border-collapse: separate; border-spacing: 0;}
