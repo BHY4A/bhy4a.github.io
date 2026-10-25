@@ -156,7 +156,7 @@
   :root:root[data-style="azure"] nav.rail > a:hover {background: var(--sel-hover); border-color: color-mix(in srgb, var(--sel-edge) 60%, transparent);}
   :root:root[data-style="azure"] nav.rail > a[aria-current="page"] {background: var(--sel); border-color: var(--sel-edge); box-shadow: inset 0 0 0 1px rgba(255,255,255,.7), 0 1px 2px rgba(0,30,60,.12);}
   :root:root[data-style="azure"] nav.rail > a[aria-current="page"] .no {background: var(--orb); color: #fff; text-shadow: 0 -1px 0 rgba(0,0,0,.4); box-shadow: 0 1px 3px rgba(0,25,55,.45), inset 0 0 0 1px var(--gel-edge);}
-  :root:root[data-style="azure"] nav.rail > a[data-tab="data"] .no {font-size: 0;}
+  :root:root[data-style="azure"] nav.rail > a[data-tab="data"] .no {font-size: 0; display: flex; gap: 0;}
   :root:root[data-style="azure"] nav.rail > a .t {color: var(--fg); text-shadow: var(--emboss);}
   :root:root[data-style="azure"] nav.rail > a .s {color: color-mix(in srgb, var(--fg) 80%, var(--muted));}
   :root:root[data-style="azure"] .rail-toc {border-left: 1px dotted color-mix(in srgb, var(--fg) 30%, transparent);}
