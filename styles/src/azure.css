@@ -177,6 +177,7 @@ body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-even
   nav.rail > a:hover { background: var(--sel-hover); border-color: color-mix(in srgb, var(--sel-edge) 60%, transparent); }
   nav.rail > a[aria-current="page"] { background: var(--sel); border-color: var(--sel-edge); box-shadow: inset 0 0 0 1px rgba(255,255,255,.7), 0 1px 2px rgba(0,30,60,.12); }
   nav.rail > a[aria-current="page"] .no { background: var(--orb); color: #fff; text-shadow: 0 -1px 0 rgba(0,0,0,.4); box-shadow: 0 1px 3px rgba(0,25,55,.45), inset 0 0 0 1px var(--gel-edge); }
+  nav.rail > a[data-tab="data"] .no { font-size: 0; } /* «Исходные данные»: в сфере только шестерёнка, символ номера скрыт */
   nav.rail > a .t { color: var(--fg); text-shadow: var(--emboss); }
   nav.rail > a .s { color: color-mix(in srgb, var(--fg) 80%, var(--muted)); }
   .rail-toc { border-left: 1px dotted color-mix(in srgb, var(--fg) 30%, transparent); }
@@ -270,6 +271,8 @@ details.adv > summary::after { width: 18px; height: 18px; border-radius: 50%; di
 /* ---------- группы настроек (как group box Aqua/Win7) ---------- */
 .opts { border: 1px solid var(--panel-edge); border-radius: 8px; background: var(--paper); box-shadow: var(--etch), 0 1px 3px rgba(0,30,60,.12); overflow: hidden; }
 .opt + .opt { border-top: 1px solid var(--line); box-shadow: var(--etch); }
+/* переключатель сверки на этапах — выделен как настройка (акцентная кромка слева, подложка), как в «Журнале» */
+.opts.chk-bar { border-color: var(--set-edge); border-left: 4px solid var(--accent); background: var(--set-bg); }
 .opt-t b { color: var(--title); text-shadow: var(--emboss); }
 .slot.auto { background: var(--chrome); }
 

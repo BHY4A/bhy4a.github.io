@@ -156,6 +156,7 @@
   :root:root[data-style="azure"] nav.rail > a:hover {background: var(--sel-hover); border-color: color-mix(in srgb, var(--sel-edge) 60%, transparent);}
   :root:root[data-style="azure"] nav.rail > a[aria-current="page"] {background: var(--sel); border-color: var(--sel-edge); box-shadow: inset 0 0 0 1px rgba(255,255,255,.7), 0 1px 2px rgba(0,30,60,.12);}
   :root:root[data-style="azure"] nav.rail > a[aria-current="page"] .no {background: var(--orb); color: #fff; text-shadow: 0 -1px 0 rgba(0,0,0,.4); box-shadow: 0 1px 3px rgba(0,25,55,.45), inset 0 0 0 1px var(--gel-edge);}
+  :root:root[data-style="azure"] nav.rail > a[data-tab="data"] .no {font-size: 0;}
   :root:root[data-style="azure"] nav.rail > a .t {color: var(--fg); text-shadow: var(--emboss);}
   :root:root[data-style="azure"] nav.rail > a .s {color: color-mix(in srgb, var(--fg) 80%, var(--muted));}
   :root:root[data-style="azure"] .rail-toc {border-left: 1px dotted color-mix(in srgb, var(--fg) 30%, transparent);}
@@ -237,6 +238,7 @@
 :root:root[data-style="azure"] .stamp td.k {background: var(--chrome); text-shadow: var(--emboss); color: var(--muted); font-weight: 700;}
 :root:root[data-style="azure"] .opts {border: 1px solid var(--panel-edge); border-radius: 8px; background: var(--paper); box-shadow: var(--etch), 0 1px 3px rgba(0,30,60,.12); overflow: hidden;}
 :root:root[data-style="azure"] .opt + .opt {border-top: 1px solid var(--line); box-shadow: var(--etch);}
+:root:root[data-style="azure"] .opts.chk-bar {border-color: var(--set-edge); border-left: 4px solid var(--accent); background: var(--set-bg);}
 :root:root[data-style="azure"] .opt-t b {color: var(--title); text-shadow: var(--emboss);}
 :root:root[data-style="azure"] .slot.auto {background: var(--chrome);}
 :root:root[data-style="azure"] .ex {border: 1px solid var(--well-edge); border-radius: 7px; background: var(--well); box-shadow: var(--etch); overflow: hidden;}
